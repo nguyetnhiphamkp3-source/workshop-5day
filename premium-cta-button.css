@@ -1,0 +1,166 @@
+/* ============================================================
+   PREMIUM CTA BUTTON — Light Trail + Hover Shimmer
+   ============================================================
+   Component: .ptb (Premium Trail Button)
+   Dependencies: none (pure CSS)
+   Browser support: Chrome 85+, Safari 16.4+, Firefox 128+
+                    (yêu cầu @property để animate conic-gradient)
+
+   Markup tối thiểu:
+   <div class="ptb">
+     <a href="#" class="ptb__btn">ĐẶT CHỖ MIỄN PHÍ TẠI ĐÂY!</a>
+   </div>
+
+   Tùy chỉnh nhanh: override các biến --ptb-* ở dưới.
+   ============================================================ */
+
+/* Cho phép animate góc của conic-gradient */
+@property --ptb-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* ------------------------------------------------------------
+   CSS Variables — chỉnh ở đây để re-skin button
+   ------------------------------------------------------------ */
+.ptb {
+  /* Kích thước & spacing */
+  --ptb-padding-y: 22px;
+  --ptb-padding-x: 90px;
+  --ptb-ring-width: 2px;
+  --ptb-gap: 6px;
+  --ptb-radius: 999px;
+
+  /* Màu sắc */
+  --ptb-bg-page: #000;
+  --ptb-ring-base: #3a1f0a;
+  --ptb-trail-1: #ffaa3c;
+  --ptb-trail-2: #ffffff;
+  --ptb-trail-3: #fff2c2;
+  --ptb-face-top: #ffd089;
+  --ptb-face-mid: #ff8c2a;
+  --ptb-face-bottom: #d96a14;
+  --ptb-text: #1a1a1a;
+
+  /* Typography */
+  --ptb-font: "PODIUM", "Bebas Neue", "Oswald", -apple-system, "Segoe UI", sans-serif;
+  --ptb-font-size: 30px;
+  --ptb-font-weight: 700;
+
+  /* Animation */
+  --ptb-trail-duration: 2.8s;
+  --ptb-shimmer-duration: 1.2s;
+}
+
+/* ------------------------------------------------------------
+   Wrapper — viền sáng + chấm trail chạy quanh
+   ------------------------------------------------------------ */
+.ptb {
+  position: relative;
+  display: inline-block;
+  padding: calc(var(--ptb-ring-width) + var(--ptb-gap));
+  border-radius: var(--ptb-radius);
+  background: conic-gradient(
+    from var(--ptb-angle),
+    var(--ptb-ring-base) 0%,
+    var(--ptb-ring-base) 78%,
+    var(--ptb-trail-1) 86%,
+    var(--ptb-trail-2) 91%,
+    var(--ptb-trail-3) 95%,
+    var(--ptb-ring-base) 100%
+  );
+  animation: ptb-trail var(--ptb-trail-duration) linear infinite;
+}
+
+/* Lớp đệm tối giữa viền và button */
+.ptb::after {
+  content: "";
+  position: absolute;
+  inset: var(--ptb-ring-width);
+  border-radius: inherit;
+  background: var(--ptb-bg-page);
+  z-index: 0;
+}
+
+/* ------------------------------------------------------------
+   Button face — gradient cam đồng + typography
+   ------------------------------------------------------------ */
+.ptb__btn {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  padding: var(--ptb-padding-y) var(--ptb-padding-x);
+  border-radius: var(--ptb-radius);
+  background: linear-gradient(
+    180deg,
+    var(--ptb-face-top) 0%,
+    var(--ptb-face-mid) 50%,
+    var(--ptb-face-bottom) 100%
+  );
+  color: var(--ptb-text);
+  font-family: var(--ptb-font);
+  font-size: var(--ptb-font-size);
+  font-weight: var(--ptb-font-weight);
+  letter-spacing: 0;
+  font-kerning: none;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  border: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* ------------------------------------------------------------
+   Hover Shimmer — vệt sáng quét qua 1 lần khi rê chuột
+   ------------------------------------------------------------ */
+.ptb__btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(255, 255, 255, 0) 70%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ptb__btn:hover::before {
+  opacity: 1;
+  animation: ptb-shimmer var(--ptb-shimmer-duration) ease-in-out;
+}
+
+/* ------------------------------------------------------------
+   Keyframes
+   ------------------------------------------------------------ */
+@keyframes ptb-trail {
+  0%   { --ptb-angle: 0deg; }
+  100% { --ptb-angle: 360deg; }
+}
+
+@keyframes ptb-shimmer {
+  0%   { left: -75%; }
+  100% { left: 125%; }
+}
+
+/* ------------------------------------------------------------
+   Accessibility — tôn trọng prefers-reduced-motion
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .ptb { animation: none; }
+  .ptb__btn:hover::before { animation: none; opacity: 0; }
+}
