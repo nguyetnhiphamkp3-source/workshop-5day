@@ -2118,18 +2118,18 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   gap:14px;
 }
 .wq-faq__item{
-  background:linear-gradient(180deg,#16100a 0%,#0c0805 100%);
-  border:1px solid rgba(255,170,60,0.14);
+  background:linear-gradient(180deg,#0e0b1a 0%,#06050d 100%);
+  border:1px solid rgba(139,92,246,0.16);
   border-radius:18px;
   overflow:hidden;
   transition:border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 .wq-faq__item:hover{
-  border-color:rgba(255,170,60,0.28);
+  border-color:rgba(139,92,246,0.32);
 }
 .wq-faq__item.is-open{
-  border-color:rgba(255,170,60,0.45);
-  box-shadow:0 10px 36px rgba(255,138,42,0.10), inset 0 1px 0 rgba(255,210,140,0.08);
+  border-color:rgba(139,92,246,0.50);
+  box-shadow:0 10px 36px rgba(139,92,246,0.12), inset 0 1px 0 rgba(167,139,250,0.10);
 }
 .wq-faq__head{
   width:100%;
@@ -2151,7 +2151,7 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   -webkit-tap-highlight-color:transparent;
 }
 .wq-faq__head:focus-visible{
-  outline:2px solid rgba(255,170,60,0.55);
+  outline:2px solid rgba(139,92,246,0.60);
   outline-offset:-2px;
   border-radius:18px;
 }
@@ -2160,8 +2160,8 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   width:38px;
   height:38px;
   border-radius:50%;
-  background:rgba(255,138,42,0.10);
-  border:1px solid rgba(255,170,60,0.40);
+  background:rgba(139,92,246,0.12);
+  border:1px solid rgba(139,92,246,0.45);
   position:relative;
   transition:background 0.25s ease, border-color 0.25s ease, transform 0.3s ease;
 }
@@ -2171,15 +2171,15 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   position:absolute;
   left:50%;
   top:50%;
-  background:#ffaa3c;
+  background:#a78bfa;
   border-radius:1px;
   transition:transform 0.28s ease, opacity 0.28s ease;
 }
 .wq-faq__icon::before{ width:14px; height:2px; transform:translate(-50%,-50%); }
 .wq-faq__icon::after { width:2px; height:14px; transform:translate(-50%,-50%); }
 .wq-faq__item.is-open .wq-faq__icon{
-  background:rgba(255,138,42,0.18);
-  border-color:rgba(255,170,60,0.65);
+  background:rgba(139,92,246,0.22);
+  border-color:rgba(139,92,246,0.70);
   transform:rotate(90deg);
 }
 .wq-faq__item.is-open .wq-faq__icon::after{
@@ -2196,7 +2196,7 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   margin:0 28px;
   padding-left:0;
   padding-right:0;
-  border-top:1px dashed rgba(255,170,60,0.28);
+  border-top:1px dashed rgba(139,92,246,0.32);
   padding-top:18px;
   color:rgba(255,255,255,0.78);
   font-size:16px;
@@ -2290,7 +2290,7 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
         </button>
         <div class="wq-faq__body">
           <div class="wq-faq__inner">
-            <p>Khác. Phần lớn người thất bại trước đây vì làm sai thứ tự hoặc thiếu hệ thống — workshop này tập trung giúp bạn xây dựng <strong style="color:#ffd089">hệ thống bán hàng tự vận hành bằng AI</strong>, không phải mẹo vặt nhất thời. Bạn sẽ có lộ trình rõ ràng để áp dụng ngay từ ngày đầu.</p>
+            <p>Khác. Phần lớn người thất bại trước đây vì làm sai thứ tự hoặc thiếu hệ thống — workshop này tập trung giúp bạn xây dựng <strong style="color:#c4b5fd">hệ thống bán hàng tự vận hành bằng AI</strong>, không phải mẹo vặt nhất thời. Bạn sẽ có lộ trình rõ ràng để áp dụng ngay từ ngày đầu.</p>
           </div>
         </div>
       </div>
@@ -2299,6 +2299,46 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 </section>
 <script data-wq-faq>
 (function(){
+  /* Move FAQ section to right before the "Đăng Ký" CTA section (.framer-1jzcc3z).
+     Framer hydrates async, so we poll briefly, then keep a MutationObserver
+     to put it back if Framer's React reconciler pulls it out of the tree. */
+  function moveBeforeCTA(){
+    var faq = document.getElementById('faq');
+    var cta = document.querySelector('.framer-1jzcc3z');
+    if (!faq || !cta) return false;
+    if (faq.nextElementSibling !== cta){
+      cta.parentNode.insertBefore(faq, cta);
+    }
+    return true;
+  }
+  function watchPosition(){
+    var faq = document.getElementById('faq');
+    var cta = document.querySelector('.framer-1jzcc3z');
+    if (!faq || !cta || !cta.parentNode) return;
+    var parent = cta.parentNode;
+    if (!('MutationObserver' in window)) return;
+    var obs = new MutationObserver(function(){
+      if (faq.nextElementSibling !== cta && document.contains(cta)){
+        try { parent.insertBefore(faq, cta); } catch(e){}
+      }
+    });
+    obs.observe(parent, {childList:true});
+  }
+  function startMove(){
+    var tries = 0;
+    var t = setInterval(function(){
+      tries++;
+      if (moveBeforeCTA() || tries > 60){
+        clearInterval(t);
+        watchPosition();
+        // Re-measure any open accordion since reflow may differ at new position.
+        document.querySelectorAll('.wq-faq__item.is-open .wq-faq__body').forEach(function(b){
+          b.style.maxHeight = b.scrollHeight + 'px';
+        });
+      }
+    }, 150);
+  }
+
   function init(){
     var items = document.querySelectorAll('.wq-faq__item');
     if (!items.length) return;
@@ -2344,10 +2384,18 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
       }, 120);
     });
   }
-  if (document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
+  function boot(){
     init();
+    if (document.readyState === 'complete'){
+      startMove();
+    } else {
+      window.addEventListener('load', startMove);
+    }
+  }
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
   }
 })();
 </script>
