@@ -2085,6 +2085,281 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 <svg display="block" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 0 9 C 0 4.029 4.029 0 9 0 C 13.971 0 18 4.029 18 9 C 18 13.971 13.971 18 9 18 C 4.029 18 0 13.971 0 9 Z" fill-opacity="var(--1m6trwb, 0)" fill="var(--21h8s6, rgb(0, 0, 0))" height="18px" id="ZAwn0e2yN" transform="translate(3 3)" width="18px"/><path d="M 0 9 C 0 4.029 4.029 0 9 0 C 13.971 0 18 4.029 18 9 C 18 13.971 13.971 18 9 18 C 4.029 18 0 13.971 0 9 Z" fill="transparent" height="18px" id="bq5comQIv" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(3 3)" width="18px"/><path d="M 0 0 L 0 5.25 L 5.25 5.25" fill="transparent" height="5.25px" id="xmvtAEC_v" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(12 6.75)" width="5.25px"/></svg>
 <svg display="block" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 0.75 12 C 0.336 12 0 11.664 0 11.25 L 0 0.75 C 0 0.336 0.336 0 0.75 0 L 15.75 0 C 16.164 0 16.5 0.336 16.5 0.75 L 16.5 11.25 C 16.5 11.664 16.164 12 15.75 12 Z" fill-opacity="var(--1m6trwb, 0)" fill="var(--21h8s6, rgb(0, 0, 0))" height="12px" id="zOILSRkC8" transform="translate(2.25 6)" width="16.5px"/><path d="M 0.75 12 C 0.336 12 0 11.664 0 11.25 L 0 0.75 C 0 0.336 0.336 0 0.75 0 L 15.75 0 C 16.164 0 16.5 0.336 16.5 0.75 L 16.5 11.25 C 16.5 11.664 16.164 12 15.75 12 Z" fill="transparent" height="12px" id="y3EH23Ec3" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(2.25 6)" width="16.5px"/><path d="M 0 3 L 4.5 0 L 4.5 9 L 0 6" fill="transparent" height="9px" id="VfHBjUae0" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(18.75 7.5)" width="4.5px"/></svg>
 </div>
+
+<!-- ============================================================
+     FAQ Section — outside Framer hydration so it persists.
+     Tone: black bg + warm orange/gold accents to match site.
+     ============================================================ -->
+<style data-wq-faq>
+.wq-faq{
+  background:#000;
+  padding:96px 24px 120px;
+  font-family:"Inter","Inter Placeholder","Manrope",sans-serif;
+  position:relative;
+  z-index:1;
+}
+.wq-faq__container{
+  max-width:920px;
+  margin:0 auto;
+}
+.wq-faq__title{
+  font-family:"Podium","Bebas Neue","Oswald",sans-serif;
+  font-weight:700;
+  font-size:clamp(38px, 5.4vw, 64px);
+  line-height:1.05;
+  letter-spacing:0.5px;
+  color:#fff;
+  text-align:center;
+  margin:0 0 56px;
+  text-transform:uppercase;
+}
+.wq-faq__title span{
+  background:linear-gradient(180deg,#ffd089 0%,#ff8c2a 60%,#d96a14 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  color:transparent;
+}
+.wq-faq__list{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.wq-faq__item{
+  background:linear-gradient(180deg,#16100a 0%,#0c0805 100%);
+  border:1px solid rgba(255,170,60,0.14);
+  border-radius:18px;
+  overflow:hidden;
+  transition:border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+.wq-faq__item:hover{
+  border-color:rgba(255,170,60,0.28);
+}
+.wq-faq__item.is-open{
+  border-color:rgba(255,170,60,0.45);
+  box-shadow:0 10px 36px rgba(255,138,42,0.10), inset 0 1px 0 rgba(255,210,140,0.08);
+}
+.wq-faq__head{
+  width:100%;
+  background:transparent;
+  border:0;
+  padding:24px 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  cursor:pointer;
+  text-align:left;
+  color:#fff;
+  font-family:inherit;
+  font-size:18px;
+  font-weight:600;
+  line-height:1.4;
+  letter-spacing:0.1px;
+  -webkit-tap-highlight-color:transparent;
+}
+.wq-faq__head:focus-visible{
+  outline:2px solid rgba(255,170,60,0.55);
+  outline-offset:-2px;
+  border-radius:18px;
+}
+.wq-faq__icon{
+  flex:0 0 auto;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:rgba(255,138,42,0.10);
+  border:1px solid rgba(255,170,60,0.40);
+  position:relative;
+  transition:background 0.25s ease, border-color 0.25s ease, transform 0.3s ease;
+}
+.wq-faq__icon::before,
+.wq-faq__icon::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  background:#ffaa3c;
+  border-radius:1px;
+  transition:transform 0.28s ease, opacity 0.28s ease;
+}
+.wq-faq__icon::before{ width:14px; height:2px; transform:translate(-50%,-50%); }
+.wq-faq__icon::after { width:2px; height:14px; transform:translate(-50%,-50%); }
+.wq-faq__item.is-open .wq-faq__icon{
+  background:rgba(255,138,42,0.18);
+  border-color:rgba(255,170,60,0.65);
+  transform:rotate(90deg);
+}
+.wq-faq__item.is-open .wq-faq__icon::after{
+  transform:translate(-50%,-50%) scaleY(0);
+  opacity:0;
+}
+.wq-faq__body{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.wq-faq__inner{
+  padding:0 28px 26px;
+  margin:0 28px;
+  padding-left:0;
+  padding-right:0;
+  border-top:1px dashed rgba(255,170,60,0.28);
+  padding-top:18px;
+  color:rgba(255,255,255,0.78);
+  font-size:16px;
+  line-height:1.7;
+}
+.wq-faq__inner p{ margin:0; }
+.wq-faq__inner p + p{ margin-top:10px; }
+@media (max-width:640px){
+  .wq-faq{ padding:64px 16px 88px; }
+  .wq-faq__title{ margin-bottom:36px; }
+  .wq-faq__head{ padding:20px 18px; font-size:15.5px; gap:14px; }
+  .wq-faq__icon{ width:32px; height:32px; }
+  .wq-faq__icon::before{ width:12px; }
+  .wq-faq__icon::after { height:12px; }
+  .wq-faq__inner{ margin:0 18px; padding:14px 0 20px; font-size:14.5px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .wq-faq__item, .wq-faq__icon, .wq-faq__icon::before, .wq-faq__icon::after, .wq-faq__body{
+    transition:none !important;
+  }
+}
+</style>
+<section class="wq-faq" id="faq" aria-labelledby="wq-faq-title">
+  <div class="wq-faq__container">
+    <h2 class="wq-faq__title" id="wq-faq-title">Câu Hỏi <span>Thường Gặp</span></h2>
+    <div class="wq-faq__list" role="list">
+      <div class="wq-faq__item is-open" role="listitem">
+        <button class="wq-faq__head" type="button" aria-expanded="true">
+          <span>Workshop có thật sự 100% miễn phí không?</span>
+          <span class="wq-faq__icon" aria-hidden="true"></span>
+        </button>
+        <div class="wq-faq__body">
+          <div class="wq-faq__inner">
+            <p>Có. Hoàn toàn miễn phí — không cần thẻ tín dụng, không có phí ẩn, không "bait-and-switch". Sau workshop có thể có gói nâng cao tùy chọn nhưng hoàn toàn không bắt buộc, bạn vẫn nhận được giá trị đầy đủ chỉ với phần miễn phí.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wq-faq__item" role="listitem">
+        <button class="wq-faq__head" type="button" aria-expanded="false">
+          <span>Tôi không có kinh nghiệm gì có học được không?</span>
+          <span class="wq-faq__icon" aria-hidden="true"></span>
+        </button>
+        <div class="wq-faq__body">
+          <div class="wq-faq__inner">
+            <p>Hoàn toàn được. Workshop được thiết kế cho người mới bắt đầu — bạn không cần biết chạy ads, không cần đã từng bán hàng online. Mọi thứ được hướng dẫn từ con số 0, theo từng bước rõ ràng.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wq-faq__item" role="listitem">
+        <button class="wq-faq__head" type="button" aria-expanded="false">
+          <span>Tôi không rành công nghệ thì sao?</span>
+          <span class="wq-faq__icon" aria-hidden="true"></span>
+        </button>
+        <div class="wq-faq__body">
+          <div class="wq-faq__inner">
+            <p>Không sao cả. Mọi công cụ trong workshop đều là kéo-thả hoặc dùng AI hỗ trợ — không cần biết code. Nếu bạn dùng được Facebook và email là đủ điều kiện tham gia.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wq-faq__item" role="listitem">
+        <button class="wq-faq__head" type="button" aria-expanded="false">
+          <span>Lỡ tôi không tham gia trực tiếp được, có xem lại được không?</span>
+          <span class="wq-faq__icon" aria-hidden="true"></span>
+        </button>
+        <div class="wq-faq__body">
+          <div class="wq-faq__inner">
+            <p>Có. Mỗi buổi đều có bản ghi (replay) gửi qua email/Zalo trong vòng 24h. Bạn có thể xem lại bất kỳ lúc nào trong suốt 5 ngày diễn ra workshop.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wq-faq__item" role="listitem">
+        <button class="wq-faq__head" type="button" aria-expanded="false">
+          <span>Workshop diễn ra trong bao lâu mỗi ngày?</span>
+          <span class="wq-faq__icon" aria-hidden="true"></span>
+        </button>
+        <div class="wq-faq__body">
+          <div class="wq-faq__inner">
+            <p>Mỗi buổi khoảng 60–90 phút, học liên tục trong 5 ngày. Khung giờ cụ thể sẽ được thông báo qua email và group ngay sau khi bạn đăng ký.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wq-faq__item" role="listitem">
+        <button class="wq-faq__head" type="button" aria-expanded="false">
+          <span>Tôi đã thử kiếm tiền online và thất bại nhiều lần, workshop này có khác không?</span>
+          <span class="wq-faq__icon" aria-hidden="true"></span>
+        </button>
+        <div class="wq-faq__body">
+          <div class="wq-faq__inner">
+            <p>Khác. Phần lớn người thất bại trước đây vì làm sai thứ tự hoặc thiếu hệ thống — workshop này tập trung giúp bạn xây dựng <strong style="color:#ffd089">hệ thống bán hàng tự vận hành bằng AI</strong>, không phải mẹo vặt nhất thời. Bạn sẽ có lộ trình rõ ràng để áp dụng ngay từ ngày đầu.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script data-wq-faq>
+(function(){
+  function init(){
+    var items = document.querySelectorAll('.wq-faq__item');
+    if (!items.length) return;
+    function setOpen(item, open){
+      var body = item.querySelector('.wq-faq__body');
+      var btn  = item.querySelector('.wq-faq__head');
+      if (!body || !btn) return;
+      if (open){
+        item.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      } else {
+        item.classList.remove('is-open');
+        btn.setAttribute('aria-expanded', 'false');
+        body.style.maxHeight = '0px';
+      }
+    }
+    // Initialize: items with .is-open start expanded, others collapsed.
+    items.forEach(function(item){
+      setOpen(item, item.classList.contains('is-open'));
+    });
+    // Click handler — single-open accordion behavior.
+    items.forEach(function(item){
+      var btn = item.querySelector('.wq-faq__head');
+      if (!btn) return;
+      btn.addEventListener('click', function(){
+        var willOpen = !item.classList.contains('is-open');
+        items.forEach(function(other){ if (other !== item) setOpen(other, false); });
+        setOpen(item, willOpen);
+      });
+    });
+    // Recompute heights on resize for any open item (text may reflow).
+    var resizeT;
+    window.addEventListener('resize', function(){
+      clearTimeout(resizeT);
+      resizeT = setTimeout(function(){
+        items.forEach(function(item){
+          if (item.classList.contains('is-open')){
+            var body = item.querySelector('.wq-faq__body');
+            if (body) body.style.maxHeight = body.scrollHeight + 'px';
+          }
+        });
+      }, 120);
+    });
+  }
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
 	<!-- Start of bodyEnd -->
     <!-- Snippet: KMQIeFNBl -->
 <script>
