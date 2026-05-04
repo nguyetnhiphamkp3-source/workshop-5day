@@ -3870,7 +3870,7 @@ html, body{
    • Body text 15px
    • fb↔fbi pair stays tight (16px between, since they're conceptually one) */
 @media (max-width:639px){
-  .wn, .lt, .fb, .fbi, .cko, .disc, .why{
+  .wn, .lt, .fb, .fbi, .cko, .disc, .why, .wq-faq{
     padding-left:20px !important;
     padding-right:20px !important;
     padding-top:30px !important;
@@ -3881,6 +3881,11 @@ html, body{
   /* Hero → wn: hero's "Bottom Lines" (200px absolute decorative) leaves a
      huge empty gap on mobile. Pull wn up to halve the visual distance. */
   .wn{ margin-top:-120px !important; position:relative !important; z-index:3 !important; }
+  /* Tighten Framer sections too (Chi Tiết & Why-Listen card) on mobile. */
+  .framer-71ANT .framer-1rvr5rw{
+    padding-top:36px !important;
+    padding-bottom:36px !important;
+  }
 
   .wn__title,
   .fb__title,
@@ -3906,28 +3911,6 @@ html, body{
     font-size:15px !important;
     line-height:1.6 !important;
   }
-}
-</style>
-<style data-section-dividers>
-/* Single divider just above the Footer — clone of Framer's
-   .framer-1kvpksr "seperation line" style: 4px-tall violet radial gradient
-   that fades to black on the sides. */
-.framer-71ANT [data-framer-name="Footer"]{
-  position:relative;
-}
-.framer-71ANT [data-framer-name="Footer"]::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:1280px;
-  max-width:100vw;
-  height:4px;
-  background:radial-gradient(63.6719% 63.6719%, #a78bfa 0%, #000 100%);
-  opacity:0.5;
-  pointer-events:none;
-  z-index:2;
 }
 </style>
 <style data-hide-event-dates>
