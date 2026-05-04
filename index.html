@@ -2470,6 +2470,54 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 })();
 </script>
 
+<script data-doanhthu-move>
+/* Move the "doanh thu marquee" Framer section (.framer-1gnawwn — the
+   "Rất nhiều người tham gia... doanh thu ngay lập tức" block) to sit
+   right after the Letter section. Same poll-then-observe pattern. */
+(function(){
+  function move(){
+    var section = document.querySelector('.framer-1gnawwn');
+    var letter = document.getElementById('letter-section');
+    if (!section || !letter || !letter.parentNode) return false;
+    if (section.parentNode !== letter.parentNode){
+      // Section not yet in the same parent (Framer still hydrating) — wait.
+      return false;
+    }
+    if (letter.nextElementSibling !== section){
+      letter.parentNode.insertBefore(section, letter.nextElementSibling);
+    }
+    return true;
+  }
+  function watch(){
+    var section = document.querySelector('.framer-1gnawwn');
+    var letter = document.getElementById('letter-section');
+    if (!section || !letter || !letter.parentNode || !('MutationObserver' in window)) return;
+    var parent = letter.parentNode;
+    var obs = new MutationObserver(function(){
+      if (letter.nextElementSibling !== section && document.contains(letter) && document.contains(section) && section.parentNode === parent){
+        try { parent.insertBefore(section, letter.nextElementSibling); } catch(e){}
+      }
+    });
+    obs.observe(parent, {childList:true});
+  }
+  function start(){
+    var tries = 0;
+    var t = setInterval(function(){
+      tries++;
+      if (move() || tries > 80){
+        clearInterval(t);
+        watch();
+      }
+    }, 150);
+  }
+  if (document.readyState === 'complete'){
+    start();
+  } else {
+    window.addEventListener('load', start);
+  }
+})();
+</script>
+
 <!-- ============================================================
      Video Feedback Section — sits right after Letter section.
      Each video card is 840px wide with 2px violet/silver alternating
@@ -2693,15 +2741,19 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
     });
   }
 
-  /* Position section right after Letter (fallback: wn, then Hero). */
+  /* Position section right after the "doanh thu marquee" Framer section
+     (.framer-1gnawwn) which is now anchored after Letter — fall back through
+     Letter → wn → Hero if that section isn't in the same parent yet. */
   function moveFb(){
     var fb = document.getElementById('fb-section');
+    var dt = document.querySelector('.framer-1gnawwn');
     var lt = document.getElementById('letter-section');
     var wn = document.getElementById('wn-section');
     var hero = document.querySelector('.framer-3zt6nn');
     if (!fb || !hero || !hero.parentNode) return false;
     var anchor = hero;
-    if (lt && lt.parentNode === hero.parentNode) anchor = lt;
+    if (dt && dt.parentNode === hero.parentNode) anchor = dt;
+    else if (lt && lt.parentNode === hero.parentNode) anchor = lt;
     else if (wn && wn.parentNode === hero.parentNode) anchor = wn;
     if (anchor.nextElementSibling !== fb){
       anchor.parentNode.insertBefore(fb, anchor.nextElementSibling);
@@ -2714,10 +2766,12 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
     if (!hero || !hero.parentNode || !fb || !('MutationObserver' in window)) return;
     var parent = hero.parentNode;
     var obs = new MutationObserver(function(){
+      var dt = document.querySelector('.framer-1gnawwn');
       var lt = document.getElementById('letter-section');
       var wn = document.getElementById('wn-section');
       var anchor = hero;
-      if (lt && lt.parentNode === parent) anchor = lt;
+      if (dt && dt.parentNode === parent) anchor = dt;
+      else if (lt && lt.parentNode === parent) anchor = lt;
       else if (wn && wn.parentNode === parent) anchor = wn;
       if (anchor.nextElementSibling !== fb && document.contains(anchor)){
         try { parent.insertBefore(fb, anchor.nextElementSibling); } catch(e){}
