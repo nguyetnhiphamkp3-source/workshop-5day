@@ -2547,94 +2547,10 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   transform:scale(1.03);
   filter:brightness(0.9);
 }
-.fb__ytplay{
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  width:78px;
-  height:78px;
-  border-radius:50%;
-  background:rgba(0,0,0,0.55);
-  border:2px solid rgba(255,255,255,0.92);
-  display:grid;
-  place-items:center;
-  pointer-events:none;
-  z-index:3;
-  transition:background 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
-}
-.fb__yt:hover .fb__ytplay{
-  background:rgba(167,139,250,0.85);
-  border-color:#fff;
-  transform:translate(-50%,-50%) scale(1.06);
-}
-.fb__ytplay::before{
-  content:"";
-  display:block;
-  width:0; height:0;
-  border-style:solid;
-  border-width:14px 0 14px 22px;
-  border-color:transparent transparent transparent #fff;
-  margin-left:5px;
-}
 .fb__yt iframe{
   position:absolute; inset:0;
   width:100%; height:100%;
   border:0;
-  pointer-events:none; /* block YouTube hover overlays during preview */
-  z-index:1;
-}
-/* Top + bottom gradient masks to hide YouTube branding (title bar, channel info,
-   YT logo, share button) during muted preview. Faded out when user activates. */
-.fb__yt::before,
-.fb__yt::after{
-  content:'';
-  position:absolute;
-  left:0; right:0;
-  z-index:2;
-  pointer-events:none;
-  transition:opacity 0.25s ease;
-}
-.fb__yt::before{
-  top:0;
-  height:34%;
-  background:linear-gradient(180deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 50%, transparent 100%);
-}
-.fb__yt::after{
-  bottom:0;
-  height:22%;
-  background:linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.35) 60%, transparent 100%);
-}
-.fb__yt.is-active iframe{
-  pointer-events:auto; /* enable normal YT controls after click-to-unmute */
-}
-.fb__yt.is-active::before,
-.fb__yt.is-active::after{
-  opacity:0;
-}
-.fb__yt.is-active .fb__ytplay,
-.fb__yt.is-active .fb__muteicon{
-  display:none;
-}
-.fb__muteicon{
-  position:absolute;
-  top:14px;
-  right:14px;
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  background:rgba(0,0,0,0.55);
-  border:1.5px solid rgba(255,255,255,0.85);
-  display:grid;
-  place-items:center;
-  color:#fff;
-  z-index:3;
-  pointer-events:none;
-  transition:background 0.25s ease;
-}
-.fb__muteicon svg{ width:18px; height:18px; display:block; }
-.fb__yt:hover .fb__muteicon{
-  background:rgba(167,139,250,0.85);
 }
 .fb__captionbox{
   background:linear-gradient(180deg, rgba(20,16,40,0.65) 0%, rgba(12,10,26,0.85) 100%);
@@ -2659,8 +2575,6 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   .fb__subtitle{ font-size:16px; margin-bottom:32px; }
   .fb__videos{ gap:24px; }
   .fb__videocard{ border-radius:16px; }
-  .fb__ytplay{ width:60px; height:60px; }
-  .fb__ytplay::before{ border-width:11px 0 11px 17px; }
   .fb__captionbox{ padding:14px 16px; }
   .fb__caption{ font-size:15px; }
 }
@@ -2675,8 +2589,6 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
       <div class="fb__videocard">
         <button class="fb__yt" type="button" data-yt="n4O3-0zQeUo" aria-label="Phát video phản hồi từ Nguyễn Hữu Thông">
           <img class="fb__ytthumb" src="https://i.ytimg.com/vi/n4O3-0zQeUo/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/n4O3-0zQeUo/hqdefault.jpg';">
-          <span class="fb__ytplay" aria-hidden="true"></span>
-          <span class="fb__muteicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"></polygon><line x1="22" y1="9" x2="16" y2="15"></line><line x1="16" y1="9" x2="22" y2="15"></line></svg></span>
         </button>
         <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Nguyễn Hữu Thông</span>: Giám Đốc Trung Tâm Chuyển Đổi Số<br>Và AI Của Viện Phát Triển Chuyển Đổi Số Việt Nam</p></div>
       </div>
@@ -2684,8 +2596,6 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
       <div class="fb__videocard">
         <button class="fb__yt" type="button" data-yt="uuVTQaqhL2g" aria-label="Phát video phản hồi từ Bá Khương Trịnh">
           <img class="fb__ytthumb" src="https://i.ytimg.com/vi/uuVTQaqhL2g/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/uuVTQaqhL2g/hqdefault.jpg';">
-          <span class="fb__ytplay" aria-hidden="true"></span>
-          <span class="fb__muteicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"></polygon><line x1="22" y1="9" x2="16" y2="15"></line><line x1="16" y1="9" x2="22" y2="15"></line></svg></span>
         </button>
         <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Bá Khương Trịnh</span>: Kinh doanh Bất động sản</p></div>
       </div>
@@ -2693,8 +2603,6 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
       <div class="fb__videocard">
         <button class="fb__yt" type="button" data-yt="7WvKgSXHs18" aria-label="Phát video phản hồi từ Cảnh Toàn">
           <img class="fb__ytthumb" src="https://i.ytimg.com/vi/7WvKgSXHs18/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/7WvKgSXHs18/hqdefault.jpg';">
-          <span class="fb__ytplay" aria-hidden="true"></span>
-          <span class="fb__muteicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"></polygon><line x1="22" y1="9" x2="16" y2="15"></line><line x1="16" y1="9" x2="22" y2="15"></line></svg></span>
         </button>
         <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Cảnh Toàn</span>: Kinh doanh Online sản phẩm số AI</p></div>
       </div>
@@ -2702,8 +2610,6 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
       <div class="fb__videocard">
         <button class="fb__yt" type="button" data-yt="L4tey9LuRhk" aria-label="Phát video phản hồi từ Phan Tuan Nguyen">
           <img class="fb__ytthumb" src="https://i.ytimg.com/vi/L4tey9LuRhk/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/L4tey9LuRhk/hqdefault.jpg';">
-          <span class="fb__ytplay" aria-hidden="true"></span>
-          <span class="fb__muteicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"></polygon><line x1="22" y1="9" x2="16" y2="15"></line><line x1="16" y1="9" x2="22" y2="15"></line></svg></span>
         </button>
         <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Phan Tuan Nguyen</span>: Thành viên AI Agent Challenge 21 Days</p></div>
       </div>
@@ -2711,8 +2617,6 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
       <div class="fb__videocard">
         <button class="fb__yt" type="button" data-yt="JK41K5CII9s" aria-label="Phát video phản hồi từ Quảng Đào Xuân">
           <img class="fb__ytthumb" src="https://i.ytimg.com/vi/JK41K5CII9s/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/JK41K5CII9s/hqdefault.jpg';">
-          <span class="fb__ytplay" aria-hidden="true"></span>
-          <span class="fb__muteicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"></polygon><line x1="22" y1="9" x2="16" y2="15"></line><line x1="16" y1="9" x2="22" y2="15"></line></svg></span>
         </button>
         <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Quảng Đào Xuân</span>: Thành viên AI Agent Challenge 21 Days</p></div>
       </div>
@@ -2720,8 +2624,6 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
       <div class="fb__videocard">
         <button class="fb__yt" type="button" data-yt="j3ESa6e84AA" aria-label="Phát video phản hồi từ Quyền Linh Đinh">
           <img class="fb__ytthumb" src="https://i.ytimg.com/vi/j3ESa6e84AA/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/j3ESa6e84AA/hqdefault.jpg';">
-          <span class="fb__ytplay" aria-hidden="true"></span>
-          <span class="fb__muteicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"></polygon><line x1="22" y1="9" x2="16" y2="15"></line><line x1="16" y1="9" x2="22" y2="15"></line></svg></span>
         </button>
         <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Quyền Linh Đinh</span>: Thành viên AI Agent Challenge 21 Days</p></div>
       </div>
@@ -2729,8 +2631,6 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
       <div class="fb__videocard">
         <button class="fb__yt" type="button" data-yt="-p40I0f28kA" aria-label="Phát video phản hồi từ Thach Pham">
           <img class="fb__ytthumb" src="https://i.ytimg.com/vi/-p40I0f28kA/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/-p40I0f28kA/hqdefault.jpg';">
-          <span class="fb__ytplay" aria-hidden="true"></span>
-          <span class="fb__muteicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"></polygon><line x1="22" y1="9" x2="16" y2="15"></line><line x1="16" y1="9" x2="22" y2="15"></line></svg></span>
         </button>
         <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Thach Pham</span>: Thành viên AI Agent Challenge 21 Days</p></div>
       </div>
@@ -2738,8 +2638,6 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
       <div class="fb__videocard">
         <button class="fb__yt" type="button" data-yt="6C9SJdrhYUo" aria-label="Phát video phản hồi từ Thong Nguyen">
           <img class="fb__ytthumb" src="https://i.ytimg.com/vi/6C9SJdrhYUo/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/6C9SJdrhYUo/hqdefault.jpg';">
-          <span class="fb__ytplay" aria-hidden="true"></span>
-          <span class="fb__muteicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"></polygon><line x1="22" y1="9" x2="16" y2="15"></line><line x1="16" y1="9" x2="22" y2="15"></line></svg></span>
         </button>
         <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Thong Nguyen</span>: Thành viên AI Agent Challenge 21 Days</p></div>
       </div>
@@ -2747,8 +2645,6 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
       <div class="fb__videocard">
         <button class="fb__yt" type="button" data-yt="zp0xkeeg7nY" aria-label="Phát video phản hồi từ Trần Thuận Hoá">
           <img class="fb__ytthumb" src="https://i.ytimg.com/vi/zp0xkeeg7nY/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/zp0xkeeg7nY/hqdefault.jpg';">
-          <span class="fb__ytplay" aria-hidden="true"></span>
-          <span class="fb__muteicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"></polygon><line x1="22" y1="9" x2="16" y2="15"></line><line x1="16" y1="9" x2="22" y2="15"></line></svg></span>
         </button>
         <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Trần Thuận Hoá</span>: Thành viên AI Agent Challenge 21 Days</p></div>
       </div>
@@ -2760,15 +2656,9 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 (function(){
   /* Click-to-play YouTube embeds (lite-youtube pattern):
      thumbnails load instantly; full iframe only mounts on user click. */
-  function ytAttrs(iframe){
-    iframe.title = 'Video phản hồi';
-    iframe.setAttribute('frameborder', '0');
-    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-    iframe.setAttribute('allowfullscreen', 'true');
-  }
-  function preview(btn){
-    /* Muted autoplay loop preview — controls hidden, iframe non-interactive
-       so YouTube hover overlays don't appear. Click upgrades to full player. */
+  function activate(btn){
+    /* Mount iframe with native YT controls + muted autoplay loop preview.
+       User uses YouTube's own UI to unmute / pause / fullscreen. */
     if (btn.querySelector('iframe')) return;
     var id = btn.getAttribute('data-yt');
     if (!id) return;
@@ -2776,40 +2666,24 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
     var iframe = document.createElement('iframe');
     iframe.src = 'https://www.youtube-nocookie.com/embed/' + idEnc +
       '?autoplay=1&mute=1&loop=1&playlist=' + idEnc +
-      '&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&iv_load_policy=3&fs=0';
-    ytAttrs(iframe);
-    btn.insertBefore(iframe, btn.firstChild);
-  }
-  function unmute(btn){
-    if (btn.classList.contains('is-active')) return;
-    var id = btn.getAttribute('data-yt');
-    if (!id) return;
-    var idEnc = encodeURIComponent(id);
-    var newSrc = 'https://www.youtube-nocookie.com/embed/' + idEnc +
-      '?autoplay=1&mute=0&controls=1&modestbranding=1&playsinline=1&rel=0';
-    var iframe = btn.querySelector('iframe');
-    if (iframe){
-      iframe.src = newSrc;
-    } else {
-      iframe = document.createElement('iframe');
-      iframe.src = newSrc;
-      ytAttrs(iframe);
-      btn.insertBefore(iframe, btn.firstChild);
-    }
-    btn.classList.add('is-active');
+      '&modestbranding=1&playsinline=1&rel=0';
+    iframe.title = 'Video phản hồi';
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+    iframe.setAttribute('allowfullscreen', 'true');
+    btn.innerHTML = '';
+    btn.appendChild(iframe);
   }
   function bind(){
-    document.querySelectorAll('.fb__yt').forEach(function(btn){
-      if (btn.__fbBound) return;
-      btn.__fbBound = true;
-      btn.addEventListener('click', function(){ unmute(btn); });
-    });
     /* Auto-preview when card scrolls into view (≥35%). Each card activates once. */
-    if (!('IntersectionObserver' in window)) return;
+    if (!('IntersectionObserver' in window)){
+      document.querySelectorAll('.fb__yt').forEach(activate);
+      return;
+    }
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if (entry.isIntersecting && entry.intersectionRatio >= 0.35){
-          preview(entry.target);
+          activate(entry.target);
           io.unobserve(entry.target);
         }
       });
