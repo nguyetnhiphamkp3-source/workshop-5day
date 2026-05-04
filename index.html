@@ -3183,10 +3183,11 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   max-width:1100px;
   margin:0 auto;
 }
-.cmp__cols{
+.cmp__heads{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:20px;
+  gap:0;
+  margin-bottom:20px;
 }
 .cmp__head{
   font-family:"Inter Display","Inter Display Placeholder","Inter",sans-serif;
@@ -3195,40 +3196,48 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   line-height:1.4;
   color:#ffffff;
   text-align:center;
-  margin:0 0 22px;
-}
-.cmp__list{
-  list-style:none;
-  padding:0;
   margin:0;
+  padding:0 12px;
+}
+.cmp__rows{
   display:flex;
   flex-direction:column;
   gap:16px;
 }
-.cmp__list li{
+.cmp__row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;  /* cells touch — connected look */
+}
+.cmp__cell{
   display:flex;
   gap:14px;
   align-items:flex-start;
   padding:18px 20px;
-  border-radius:14px;
   font-family:"Inter","Inter Placeholder","Manrope",sans-serif;
   font-size:16px;
   line-height:1.55;
   color:#ffffff;
 }
-/* OLD WAY column — muted dark with diagonal stripe overlay */
-.cmp__col--old .cmp__list li{
+/* OLD column cells — muted dark with diagonal stripe overlay,
+   rounded only on left edges, no right border (shared with new). */
+.cmp__cell--old{
   background:
     repeating-linear-gradient(135deg,
       rgba(255,255,255,0.035) 0 1px,
       transparent 1px 9px),
     linear-gradient(180deg, rgba(20,28,24,0.55), rgba(10,16,14,0.75));
   border:1px solid rgba(255,255,255,0.07);
+  border-right:0;
+  border-radius:14px 0 0 14px;
 }
-/* NEW WAY column — dark navy/violet */
-.cmp__col--new .cmp__list li{
+/* NEW column cells — dark navy/violet, rounded right, hairline left
+   acts as divider between paired cells. */
+.cmp__cell--new{
   background:linear-gradient(180deg, rgba(14,16,46,0.85) 0%, rgba(8,10,30,0.95) 100%);
   border:1px solid rgba(110,130,255,0.18);
+  border-left:1px solid rgba(255,255,255,0.10);
+  border-radius:0 14px 14px 0;
 }
 .cmp__icon{
   flex:0 0 auto;
@@ -3256,35 +3265,50 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 .cmp__text{ flex:1 1 auto; }
 @media (max-width:760px){
   .cmp{ padding:32px 16px 56px; }
-  .cmp__cols{ grid-template-columns:1fr; gap:24px; }
-  .cmp__head{ font-size:16px; margin-bottom:18px; }
-  .cmp__list{ gap:12px; }
-  .cmp__list li{ padding:14px 16px; font-size:15px; gap:12px; }
+  .cmp__heads{ grid-template-columns:1fr; gap:10px; margin-bottom:16px; }
+  .cmp__head{ font-size:16px; }
+  .cmp__rows{ gap:18px; }
+  .cmp__row{ grid-template-columns:1fr; }
+  .cmp__cell{ padding:14px 16px; font-size:15px; gap:12px; }
+  .cmp__cell--old{
+    border:1px solid rgba(255,255,255,0.07);
+    border-bottom:0;
+    border-radius:14px 14px 0 0;
+  }
+  .cmp__cell--new{
+    border:1px solid rgba(110,130,255,0.18);
+    border-top:1px solid rgba(255,255,255,0.10);
+    border-radius:0 0 14px 14px;
+  }
   .cmp__icon{ width:20px; height:20px; font-size:12px; }
 }
 </style>
 <section class="cmp" id="cmp-section" aria-label="So sánh cách cũ và cách mới với AI">
   <div class="cmp__container">
-    <div class="cmp__cols">
-      <div class="cmp__col cmp__col--old">
-        <h3 class="cmp__head">Kiếm tiền online theo cách cũ đòi hỏi:</h3>
-        <ul class="cmp__list">
-          <li><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Nhiều năm tích lũy chuyên môn trong một lĩnh vực cụ thể</span></li>
-          <li><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Tự tạo sản phẩm từ đầu — và hy vọng nó bán được</span></li>
-          <li><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Xây dựng lượng người theo dõi trước khi có doanh thu</span></li>
-          <li><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Thuê team: designer, copywriter, kỹ thuật viên</span></li>
-          <li><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Biết làm video, thiết kế, viết lách</span></li>
-        </ul>
+    <div class="cmp__heads">
+      <h3 class="cmp__head">Kiếm tiền online theo cách cũ đòi hỏi:</h3>
+      <h3 class="cmp__head">Bây giờ, AI có thể làm tất cả những điều đó thay bạn:</h3>
+    </div>
+    <div class="cmp__rows">
+      <div class="cmp__row">
+        <div class="cmp__cell cmp__cell--old"><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Nhiều năm tích lũy chuyên môn trong một lĩnh vực cụ thể</span></div>
+        <div class="cmp__cell cmp__cell--new"><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Quét hàng nghìn nguồn thông tin trong vài phút</span></div>
       </div>
-      <div class="cmp__col cmp__col--new">
-        <h3 class="cmp__head">Bây giờ, AI có thể làm tất cả những điều đó thay bạn:</h3>
-        <ul class="cmp__list">
-          <li><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Quét hàng nghìn nguồn thông tin trong vài phút</span></li>
-          <li><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Xác định chính xác vấn đề người ta sẵn sàng trả tiền để giải quyết</span></li>
-          <li><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Tổng hợp và đóng gói thành sản phẩm kỹ thuật số hoàn chỉnh</span></li>
-          <li><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Viết nội dung bán hàng, email, quảng cáo</span></li>
-          <li><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Gần như không cần kỹ năng kỹ thuật — chỉ cần biết cách ra lệnh đúng</span></li>
-        </ul>
+      <div class="cmp__row">
+        <div class="cmp__cell cmp__cell--old"><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Tự tạo sản phẩm từ đầu — và hy vọng nó bán được</span></div>
+        <div class="cmp__cell cmp__cell--new"><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Xác định chính xác vấn đề người ta sẵn sàng trả tiền để giải quyết</span></div>
+      </div>
+      <div class="cmp__row">
+        <div class="cmp__cell cmp__cell--old"><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Xây dựng lượng người theo dõi trước khi có doanh thu</span></div>
+        <div class="cmp__cell cmp__cell--new"><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Tổng hợp và đóng gói thành sản phẩm kỹ thuật số hoàn chỉnh</span></div>
+      </div>
+      <div class="cmp__row">
+        <div class="cmp__cell cmp__cell--old"><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Thuê team: designer, copywriter, kỹ thuật viên</span></div>
+        <div class="cmp__cell cmp__cell--new"><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Viết nội dung bán hàng, email, quảng cáo</span></div>
+      </div>
+      <div class="cmp__row">
+        <div class="cmp__cell cmp__cell--old"><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Biết làm video, thiết kế, viết lách</span></div>
+        <div class="cmp__cell cmp__cell--new"><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Gần như không cần kỹ năng kỹ thuật — chỉ cần biết cách ra lệnh đúng</span></div>
       </div>
     </div>
   </div>
