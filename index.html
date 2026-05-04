@@ -2502,7 +2502,7 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   font-weight:400;
   font-size:18px;
   line-height:1.55;
-  color:rgba(255,255,255,0.78);
+  color:#ffffff;
   margin:0 auto 48px;
   max-width:760px;
 }
@@ -2515,19 +2515,9 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 .fb__videocard{
   width:100%;
   max-width:840px;
-  /* 2px gradient border with caption strip inside card */
-  border:2px solid transparent;
+  border:0;
   border-radius:20px;
-  background:
-    linear-gradient(#000, #000) padding-box,
-    linear-gradient(135deg,
-      #a78bfa 0%,
-      #e5e7eb 16.6%,
-      #c4b5fd 33.3%,
-      #d4d4d8 50%,
-      #b9a4ff 66.6%,
-      #f3f4f6 83.3%,
-      #a78bfa 100%) border-box;
+  background:#000;
   padding:0;
   overflow:hidden;
 }
@@ -2632,7 +2622,7 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
           <img class="fb__ytthumb" src="https://i.ytimg.com/vi/n4O3-0zQeUo/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/n4O3-0zQeUo/hqdefault.jpg';">
           <span class="fb__ytplay" aria-hidden="true"></span>
         </button>
-        <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Nguyễn Hữu Thông</span>: Giám Đốc Trung Tâm Chuyển Đổi Số Và AI Của Viện Phát Triển Chuyển Đổi Số Việt Nam</p></div>
+        <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Nguyễn Hữu Thông</span>: Giám Đốc Trung Tâm Chuyển Đổi Số<br>Và AI Của Viện Phát Triển Chuyển Đổi Số Việt Nam</p></div>
       </div>
 
       <div class="fb__videocard">
@@ -2710,8 +2700,12 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
     if (btn.querySelector('iframe')) return;
     var id = btn.getAttribute('data-yt');
     if (!id) return;
+    var idEnc = encodeURIComponent(id);
+    /* Muted autoplay loop preview — user unmutes via YouTube's player controls. */
     var iframe = document.createElement('iframe');
-    iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + idEnc +
+      '?autoplay=1&mute=1&loop=1&playlist=' + idEnc +
+      '&controls=1&modestbranding=1&playsinline=1&rel=0';
     iframe.title = 'Video phản hồi';
     iframe.setAttribute('frameborder', '0');
     iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
@@ -2724,6 +2718,20 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
       if (btn.__fbBound) return;
       btn.__fbBound = true;
       btn.addEventListener('click', function(){ activate(btn); });
+    });
+    /* Auto-preview: activate iframes when card scrolls into view (≥35% visible).
+       Each card activates once — staggered loading as user scrolls. */
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.35){
+          activate(entry.target);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: [0, 0.35, 0.7], rootMargin: '0px 0px -10% 0px' });
+    document.querySelectorAll('.fb__yt').forEach(function(btn){
+      if (!btn.querySelector('iframe')) io.observe(btn);
     });
   }
 
