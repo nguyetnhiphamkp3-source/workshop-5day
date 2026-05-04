@@ -3921,9 +3921,11 @@ html, body{
     padding-top:36px !important;
     padding-bottom:36px !important;
   }
-  /* Why-Listen ("Tại Sao Bạn Nên Lắng Nghe Tôi?") timeline tightening: */
+  /* Why-Listen ("Tại Sao Bạn Nên Lắng Nghe Tôi?") timeline tightening:
+     Each SSR breakpoint emits a different framer-XXXX class for the same
+     "Blank" container, so target by data-framer-name attribute instead. */
   .framer-71ANT .framer-1d1183l{ gap:32px !important; }
-  .framer-71ANT .framer-1auvred{ padding-bottom:28px !important; }
+  .framer-71ANT [data-framer-name="Blank"]{ padding-bottom:28px !important; }
 
   .wn__title,
   .fb__title,
