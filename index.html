@@ -2807,6 +2807,201 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 </script>
 
 <!-- ============================================================
+     Image Feedback Section — sits right under Video Feedback.
+     740px-wide container, 2-column masonry, ~10 images visible
+     initially, fade + "Xem thêm" → expand, "Rút gọn" → collapse.
+     ============================================================ -->
+<style data-fbi>
+.fbi{
+  background:#000;
+  padding:32px 24px 80px;
+  font-family:"Inter Display","Inter Display Placeholder","Inter","Inter Placeholder",sans-serif;
+}
+.fbi__container{
+  max-width:740px;
+  margin:0 auto;
+}
+.fbi__title{
+  font-family:"Inter Display","Inter Display Placeholder","Inter",sans-serif;
+  font-weight:500;
+  font-size:20px;
+  line-height:1.55;
+  color:#ffffff;
+  text-align:center;
+  margin:0 0 32px;
+}
+.fbi__wrap{
+  position:relative;
+  max-height:1300px;
+  overflow:hidden;
+  transition:max-height 0.4s ease;
+}
+.fbi__wrap.is-expanded{
+  max-height:none;
+}
+.fbi__grid{
+  column-count:2;
+  column-gap:10px;
+}
+.fbi__grid img{
+  display:block;
+  width:100%;
+  height:auto;
+  margin:0 0 10px;
+  border-radius:10px;
+  break-inside:avoid;
+  user-select:none;
+  background:#0d0a18;
+}
+.fbi__fade{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height:240px;
+  background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 60%, #000 100%);
+  pointer-events:none;
+  transition:opacity 0.3s ease;
+}
+.fbi__wrap.is-expanded .fbi__fade{ opacity:0; }
+.fbi__cta{
+  display:flex;
+  justify-content:center;
+  margin-top:24px;
+}
+.fbi__btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:#7c3aed;
+  color:#ffffff;
+  border:0;
+  padding:14px 28px;
+  border-radius:999px;
+  font-family:"Inter","Inter Placeholder","Manrope",sans-serif;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  transition:background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.fbi__btn:hover{
+  background:#6d28d9;
+  transform:translateY(-1px);
+  box-shadow:0 8px 20px rgba(124,58,237,0.35);
+}
+.fbi__btn:active{ transform:translateY(0); }
+.fbi__chev{
+  display:inline-block;
+  width:12px; height:12px;
+  border-right:2px solid currentColor;
+  border-bottom:2px solid currentColor;
+  transform:rotate(45deg) translate(-2px,-2px);
+  transition:transform 0.3s ease;
+}
+.fbi__btn.is-expanded .fbi__chev{
+  transform:rotate(-135deg) translate(-2px,-2px);
+}
+@media (max-width:639px){
+  .fbi{ padding:24px 16px 64px; }
+  .fbi__title{ font-size:17px; margin-bottom:24px; }
+  .fbi__wrap{ max-height:1000px; }
+  .fbi__grid{ column-gap:6px; }
+  .fbi__grid img{ margin-bottom:6px; border-radius:8px; }
+  .fbi__btn{ font-size:15px; padding:12px 22px; }
+  .fbi__fade{ height:180px; }
+}
+</style>
+<section class="fbi" id="fbi-section" aria-labelledby="fbi-title">
+  <div class="fbi__container">
+    <p class="fbi__title" id="fbi-title">Hơn 190 người tham gia đã "Wow" vì concept học tập mới lạ độc đáo với AI Agent và kết quả thực chiến ngoài mong đợi.</p>
+    <div class="fbi__wrap" id="fbi-wrap">
+      <div class="fbi__grid" id="fbi-grid"></div>
+      <div class="fbi__fade" aria-hidden="true"></div>
+    </div>
+    <div class="fbi__cta">
+      <button class="fbi__btn" type="button" id="fbi-btn" aria-expanded="false" aria-controls="fbi-wrap">
+        <span class="fbi__btnlabel">Xem thêm feedback</span>
+        <span class="fbi__chev" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</section>
+<script data-fbi>
+(function(){
+  var FOLDER = 'Feedback Challenge mới/';
+  var IMAGES = ["photo_2026-04-28 15.06.50.webp","photo_2026-04-28 15.06.52.webp","photo_2026-04-28 15.06.54.webp","photo_2026-04-28 15.06.56.webp","photo_2026-04-28 15.06.57.webp","photo_2026-04-28 15.06.58.webp","photo_2026-04-28 15.06.59.webp","photo_2026-04-28 15.07.00.webp","photo_2026-04-28 15.07.01.webp","photo_2026-04-28 15.07.02.webp","photo_2026-04-28 15.07.03.webp","photo_2026-04-28 15.07.04.webp","photo_2026-04-28 15.07.06.webp","photo_2026-04-28 15.07.07.webp","photo_2026-04-28 15.07.08.webp","photo_2026-04-28 15.07.09.webp","photo_2026-04-28 15.07.11.webp","photo_2026-04-28 15.07.12.webp","photo_2026-04-28 15.07.13.webp","photo_2026-04-28 15.07.14.webp","photo_2026-04-28 15.07.16.webp","photo_2026-04-28 15.07.17.webp","photo_2026-04-28 15.07.18.webp","photo_2026-04-28 15.07.19.webp","photo_2026-04-28 15.07.21.webp","photo_2026-04-28 15.07.22.webp","photo_2026-04-28 15.07.23.webp","photo_2026-04-28 15.07.24.webp","photo_2026-04-28 15.07.25.webp","photo_2026-04-28 15.07.26.webp","photo_2026-04-28 15.07.27.webp","photo_2026-04-28 15.07.28.webp","photo_2026-04-28 15.07.29.webp","photo_2026-04-28 15.07.30.webp","photo_2026-04-28 15.07.32.webp","photo_2026-04-28 15.07.33.webp","photo_2026-04-28 15.07.38.webp","photo_2026-04-28 15.07.42 (1).webp","photo_2026-04-28 15.07.42.webp","photo_2026-04-28 15.07.44.webp","photo_2026-04-28 15.07.45.webp","photo_2026-04-28 15.07.46.webp","photo_2026-04-28 15.07.47.webp","photo_2026-04-28 15.07.49.webp","photo_2026-04-28 15.07.50.webp","photo_2026-04-28 15.07.52.webp","photo_2026-04-28 15.07.53.webp","photo_2026-04-28 15.07.58.webp","photo_2026-04-28 15.07.59.webp","photo_2026-04-28 15.08.00.webp","photo_2026-04-28 15.08.01.webp","photo_2026-04-28 15.08.02.webp","photo_2026-04-28 15.08.03.webp","photo_2026-04-28 15.08.04.webp","photo_2026-04-28 15.08.05.webp","photo_2026-04-28 15.08.06.webp","photo_2026-04-28 15.08.07.webp","photo_2026-04-28 15.08.08.webp","photo_2026-04-28 15.08.09.webp","photo_2026-04-28 15.08.10.webp","photo_2026-04-28 15.08.11.webp","photo_2026-04-28 15.08.12.webp","photo_2026-04-28 15.08.13.webp","photo_2026-04-28 15.08.14.webp","photo_2026-04-28 15.08.15.webp","photo_2026-04-28 15.08.16.webp","photo_2026-04-28 15.08.17.webp","photo_2026-04-28 15.08.18.webp","photo_2026-04-28 15.08.19.webp","photo_2026-04-28 15.08.20.webp","photo_2026-04-28 15.08.21.webp","photo_2026-04-28 15.08.22.webp","photo_2026-04-28 15.08.23.webp","photo_2026-04-28 15.08.24.webp","photo_2026-04-28 15.08.25.webp","photo_2026-04-29 16.01.58.webp","photo_2026-04-29 16.01.59.webp","photo_2026-04-29 16.02.02.webp","photo_2026-04-29 16.02.03.webp","photo_2026-04-29 16.02.06.webp","photo_2026-04-29 16.02.07.webp","photo_2026-04-29 16.02.09.webp","photo_2026-04-29 16.02.10.webp","photo_2026-04-29 16.02.12.webp","photo_2026-04-29 16.02.13.webp","photo_2026-04-29 16.03.04.webp","photo_2026-04-29 16.03.07.webp","photo_2026-04-29 16.03.08.webp","photo_2026-04-29 16.03.10.webp","photo_2026-04-29 16.03.12.webp","photo_2026-04-29 16.03.14.webp","photo_2026-04-29 16.03.16.webp","photo_2026-04-29 16.03.17.webp","photo_2026-04-29 16.03.19.webp","photo_2026-04-29 16.03.21.webp","photo_2026-04-29 16.03.22.webp","photo_2026-04-29 16.03.24.webp","photo_2026-04-29 16.03.25.webp","photo_2026-04-29 16.03.27.webp","photo_2026-04-29 16.03.28.webp","photo_2026-04-29 16.03.29.webp","photo_2026-04-29 16.03.30.webp","photo_2026-04-29 16.03.31.webp","photo_2026-04-29 16.03.33.webp","photo_2026-04-29 16.03.35.webp","photo_2026-04-29 16.03.36.webp","photo_2026-04-29 16.03.37.webp","photo_2026-04-29 16.03.39.webp","photo_2026-04-29 16.03.40.webp"];
+
+  function inject(){
+    var grid = document.getElementById('fbi-grid');
+    if (!grid || grid.childNodes.length) return;
+    var html = IMAGES.map(function(name){
+      return '<img src="' + FOLDER + encodeURI(name) + '" alt="" loading="lazy" decoding="async">';
+    }).join('');
+    grid.innerHTML = html;
+  }
+
+  function bindToggle(){
+    var btn = document.getElementById('fbi-btn');
+    var wrap = document.getElementById('fbi-wrap');
+    var label = btn && btn.querySelector('.fbi__btnlabel');
+    if (!btn || !wrap || !label || btn.__fbiBound) return;
+    btn.__fbiBound = true;
+    var collapsedLabel = 'Xem thêm ' + (IMAGES.length - 10) + ' feedback nữa';
+    label.textContent = collapsedLabel;
+    btn.addEventListener('click', function(){
+      var expanded = wrap.classList.toggle('is-expanded');
+      btn.classList.toggle('is-expanded', expanded);
+      btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      label.textContent = expanded ? 'Rút gọn' : collapsedLabel;
+      if (!expanded){
+        var sec = document.getElementById('fbi-section');
+        if (sec) sec.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  }
+
+  /* Position section right after Video Feedback (#fb-section). */
+  function move(){
+    var fbi = document.getElementById('fbi-section');
+    var fb = document.getElementById('fb-section');
+    if (!fbi || !fb || !fb.parentNode) return false;
+    if (fb.nextElementSibling !== fbi){
+      fb.parentNode.insertBefore(fbi, fb.nextElementSibling);
+    }
+    return true;
+  }
+  function watch(){
+    var fb = document.getElementById('fb-section');
+    var fbi = document.getElementById('fbi-section');
+    if (!fb || !fb.parentNode || !fbi || !('MutationObserver' in window)) return;
+    var parent = fb.parentNode;
+    var obs = new MutationObserver(function(){
+      if (fb.nextElementSibling !== fbi && document.contains(fb)){
+        try { parent.insertBefore(fbi, fb.nextElementSibling); } catch(e){}
+      }
+    });
+    obs.observe(parent, {childList:true});
+  }
+  function start(){
+    inject();
+    bindToggle();
+    var tries = 0;
+    var t = setInterval(function(){
+      tries++;
+      if (move() || tries > 80){
+        clearInterval(t);
+        watch();
+      }
+    }, 150);
+  }
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+})();
+</script>
+
+<!-- ============================================================
      FAQ Section — outside Framer hydration so it persists.
      Tone: black bg + warm orange/gold accents to match site.
      ============================================================ -->
