@@ -3856,30 +3856,13 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 </script>
 
 <style data-section-dividers>
-/* Section dividers — clone of Framer's .framer-1kvpksr "seperation line"
-   style: 4px-tall violet radial gradient that fades to black on the sides,
-   creating a soft glow line. Applied via ::before on each section. */
-.framer-71ANT [data-framer-name^="LP - "],
-.framer-71ANT [data-framer-name^="Section:"],
-.wn,
-.lt,
-.fb,
-.fbi,
-.cko,
-.disc,
-.why{
+/* Single divider just above the Footer — clone of Framer's
+   .framer-1kvpksr "seperation line" style: 4px-tall violet radial gradient
+   that fades to black on the sides. */
+.framer-71ANT [data-framer-name="Footer"]{
   position:relative;
-  border-top:0 !important;
 }
-.framer-71ANT [data-framer-name^="LP - "]::before,
-.framer-71ANT [data-framer-name^="Section:"]::before,
-.wn::before,
-.lt::before,
-.fb::before,
-.fbi::before,
-.cko::before,
-.disc::before,
-.why::before{
+.framer-71ANT [data-framer-name="Footer"]::before{
   content:"";
   position:absolute;
   top:0;
@@ -3892,10 +3875,6 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   opacity:0.5;
   pointer-events:none;
   z-index:2;
-}
-/* Hidden Event Dates section: no divider needed. */
-.framer-71ANT [data-framer-name="LP - Event Dates"]::before{
-  display:none !important;
 }
 </style>
 <style data-hide-event-dates>
