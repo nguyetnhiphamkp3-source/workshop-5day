@@ -2471,34 +2471,42 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 </script>
 
 <script data-doanhthu-move>
-/* Move the "doanh thu marquee" Framer section (.framer-1gnawwn — the
-   "Rất nhiều người tham gia... doanh thu ngay lập tức" block) to sit
-   right after the Letter section. Same poll-then-observe pattern. */
+/* Move the "doanh thu" Framer section (.framer-1gnawwn — the
+   "Rất nhiều người tham gia..." block) to sit right after the Letter
+   section. The section is nested inside .framer-gmm4pm in Framer's tree,
+   so we move it ACROSS parents. Subtree observer re-enforces position
+   if Framer's reconciler tries to put it back. */
 (function(){
   function move(){
     var section = document.querySelector('.framer-1gnawwn');
     var letter = document.getElementById('letter-section');
     if (!section || !letter || !letter.parentNode) return false;
-    if (section.parentNode !== letter.parentNode){
-      // Section not yet in the same parent (Framer still hydrating) — wait.
-      return false;
-    }
-    if (letter.nextElementSibling !== section){
+    if (letter.nextElementSibling === section) return true;
+    try {
       letter.parentNode.insertBefore(section, letter.nextElementSibling);
-    }
+    } catch(e){ return false; }
     return true;
   }
   function watch(){
-    var section = document.querySelector('.framer-1gnawwn');
     var letter = document.getElementById('letter-section');
-    if (!section || !letter || !letter.parentNode || !('MutationObserver' in window)) return;
+    if (!letter || !letter.parentNode || !('MutationObserver' in window)) return;
     var parent = letter.parentNode;
+    var pending = false;
     var obs = new MutationObserver(function(){
-      if (letter.nextElementSibling !== section && document.contains(letter) && document.contains(section) && section.parentNode === parent){
-        try { parent.insertBefore(section, letter.nextElementSibling); } catch(e){}
-      }
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(function(){
+        pending = false;
+        var section = document.querySelector('.framer-1gnawwn');
+        if (!section || !document.contains(letter)) return;
+        if (letter.nextElementSibling !== section){
+          try { parent.insertBefore(section, letter.nextElementSibling); } catch(e){}
+        }
+      });
     });
-    obs.observe(parent, {childList:true});
+    /* subtree: catch when Framer's React reconciler re-mounts the section
+       inside its original parent (.framer-gmm4pm) deeper in the tree. */
+    obs.observe(parent, {childList:true, subtree:true});
   }
   function start(){
     var tries = 0;
