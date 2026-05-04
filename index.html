@@ -3856,14 +3856,42 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 </script>
 
 <style data-chitiet-overrides>
-/* Widen the 4-card row to 1400px (was constrained by Framer's default).
-   Target the flex container .framer-zs0oem and its wrappers. */
-.framer-71ANT .framer-zs0oem,
-.framer-71ANT .framer-1en7fgv{
+/* Widen the 4-card row up to 1400px. The Section: Details container
+   (.framer-1rvr5rw) is constrained by an outer parent's max-width, so
+   first break it out to viewport width via "full-bleed" trick, then
+   cap the inner gradient card (.framer-1dk9q6l) at 1400px. */
+.framer-71ANT .framer-1rvr5rw{
+  width:100vw !important;
+  max-width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  padding-left:max(40px, calc((100vw - 1400px) / 2)) !important;
+  padding-right:max(40px, calc((100vw - 1400px) / 2)) !important;
+}
+.framer-71ANT .framer-1dk9q6l{
   max-width:1400px !important;
   width:100% !important;
   margin-left:auto !important;
   margin-right:auto !important;
+}
+.framer-71ANT .framer-1en7fgv,
+.framer-71ANT .framer-zs0oem{
+  max-width:1400px !important;
+  width:100% !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+@media (max-width:1480px){
+  .framer-71ANT .framer-1rvr5rw{
+    padding-left:40px !important;
+    padding-right:40px !important;
+  }
+}
+@media (max-width:809.98px){
+  .framer-71ANT .framer-1rvr5rw{
+    padding-left:16px !important;
+    padding-right:16px !important;
+  }
 }
 </style>
 <script data-chitiet>
