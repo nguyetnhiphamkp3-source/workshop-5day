@@ -3855,6 +3855,17 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 })();
 </script>
 
+<style data-chitiet-overrides>
+/* Widen the 4-card row to 1400px (was constrained by Framer's default).
+   Target the flex container .framer-zs0oem and its wrappers. */
+.framer-71ANT .framer-zs0oem,
+.framer-71ANT .framer-1en7fgv{
+  max-width:1400px !important;
+  width:100% !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+</style>
 <script data-chitiet>
 /* "Chi Tiết Chương Trình" — update first 3 cards' content + clone a 4th
    card (TẠI SAO) after the 3rd. The 3 cards live deep in Framer's tree,
