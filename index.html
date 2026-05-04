@@ -3156,36 +3156,64 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
     <div class="cko__outro">
       <p>Bạn không tạo ra thông tin từ đầu.</p>
       <p>Bạn dùng AI để xác định vấn đề người ta sẵn sàng trả tiền — rồi đóng gói thông tin sẵn có thành sản phẩm họ muốn mua.</p>
-      <div class="cko__cta">
-        <div class="ptb">
-          <a href="#" class="ptb__btn" data-cko-cta>ĐẶT CHỖ MIỄN PHÍ TẠI ĐÂY!</a>
-        </div>
-        <div class="cko__perks">
-          <span class="cko__perk">
-            <span class="cko__perkicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7c0-2 1-3 3-3 2 0 3 1 6 1s4-1 6-1 3 1 3 3v3a8 8 0 0 1-9 8 8 8 0 0 1-9-8z"/><circle cx="9" cy="11" r="1.2" fill="currentColor"/><circle cx="15" cy="11" r="1.2" fill="currentColor"/><path d="M9 14.5c1 1 5 1 6 0"/></svg></span>
-            Không để lộ mặt
-          </span>
-          <span class="cko__perk">
-            <span class="cko__perkicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
-            Không cần kinh nghiệm
-          </span>
-        </div>
-      </div>
+      <div class="cko__cta-mount" id="cko-cta-mount" data-cko-cta-mount></div>
     </div>
   </div>
 </section>
 <script data-cko-cta>
 (function(){
-  /* CTA button scrolls to the registration section .framer-1jzcc3z */
-  document.addEventListener('click', function(e){
-    var a = e.target.closest('[data-cko-cta]');
-    if (!a) return;
+  /* Clone the hero CTA cluster (Framer's own button + 2 perks) into the cko
+     section so it matches the site's style guide exactly. Cloned button's
+     click is overridden to smooth-scroll to the registration section. */
+  function cloneInto(){
+    var mount = document.getElementById('cko-cta-mount');
+    if (!mount || mount.childNodes.length) return false;
+    var btnStack = document.querySelector('.framer-10ywwfi');
+    var perks = document.querySelector('.framer-1fhyd7f');
+    if (!btnStack || !perks) return false;
+    var btnClone = btnStack.cloneNode(true);
+    var perksClone = perks.cloneNode(true);
+    /* Suffix any IDs to keep the document unique. */
+    [btnClone, perksClone].forEach(function(root){
+      if (root.id) root.id += '-cko';
+      root.querySelectorAll('[id]').forEach(function(el){ el.id += '-cko'; });
+    });
+    mount.appendChild(btnClone);
+    mount.appendChild(perksClone);
+    /* Override anchor behavior: smooth-scroll to register section. */
     var dest = document.querySelector('.framer-1jzcc3z');
-    if (dest){
-      e.preventDefault();
-      dest.scrollIntoView({behavior:'smooth', block:'start'});
-    }
-  });
+    btnClone.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(e){
+        if (!dest) return;
+        e.preventDefault();
+        dest.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+    return true;
+  }
+  function watch(){
+    var mount = document.getElementById('cko-cta-mount');
+    if (!mount || !('MutationObserver' in window)) return;
+    var obs = new MutationObserver(function(){
+      if (mount.childNodes.length === 0) cloneInto();
+    });
+    obs.observe(mount, {childList:true});
+  }
+  function start(){
+    var tries = 0;
+    var t = setInterval(function(){
+      tries++;
+      if (cloneInto() || tries > 80){
+        clearInterval(t);
+        watch();
+      }
+    }, 150);
+  }
+  if (document.readyState === 'complete'){
+    start();
+  } else {
+    window.addEventListener('load', start);
+  }
 })();
 </script>
 <script data-cko>
@@ -3257,45 +3285,18 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   margin:0 0 14px;
 }
 .cko__outro p:last-of-type{ margin-bottom:30px; }
-.cko__cta{
+.cko__cta-mount{
   display:flex;
   flex-direction:column;
   align-items:center;
   gap:18px;
   margin-top:6px;
 }
-.cko__perks{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:28px;
-  font-family:"Inter","Inter Placeholder","Manrope",sans-serif;
-  font-size:16px;
-  color:#ffffff;
-}
-.cko__perk{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-}
-.cko__perkicon{
-  flex:0 0 auto;
-  width:30px;
-  height:30px;
-  border-radius:50%;
-  background:rgba(139,92,246,0.14);
-  border:1px solid rgba(167,139,250,0.45);
-  display:grid;
-  place-items:center;
-  color:#a78bfa;
-}
-.cko__perkicon svg{ width:16px; height:16px; display:block; }
+.cko__cta-mount > *{ margin:0 auto; }
 @media (max-width:639px){
   .cko__outro{ margin-top:36px; }
   .cko__outro p{ font-size:16px; }
-  .cko__perks{ gap:16px; font-size:15px; }
-  .cko__perkicon{ width:26px; height:26px; }
-  .cko__perkicon svg{ width:14px; height:14px; }
+  .cko__cta-mount{ gap:14px; }
 }
 .cmp__heads{
   display:grid;
