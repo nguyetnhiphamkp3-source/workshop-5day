@@ -4,8 +4,38 @@
 <html lang="en" data-redirect-timezone="1">
 <head>
 	<meta charset="utf-8">
-	
-	
+
+	<script>
+	/* Scroll restoration for live-reload dev: our JS moves sections around after
+	   initial render. Browser auto-restore happens before JS settles, so it lands
+	   at the wrong Y (often near bottom). Disable auto-restore, save scrollY on
+	   unload, restore manually after our DOM rearrangement settles. */
+	(function(){
+	  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+	  window.addEventListener('beforeunload', function(){
+	    try { sessionStorage.setItem('__scrollY', String(window.scrollY)); } catch(e){}
+	  });
+	  window.addEventListener('load', function(){
+	    var y;
+	    try { y = parseInt(sessionStorage.getItem('__scrollY') || '0', 10); } catch(e){ return; }
+	    if (!y) return;
+	    var attempts = 0;
+	    var lastH = -1;
+	    function tryRestore(){
+	      var h = document.body.scrollHeight;
+	      if (h === lastH || attempts > 30){
+	        window.scrollTo(0, y);
+	        return;
+	      }
+	      lastH = h;
+	      window.scrollTo(0, y);
+	      attempts++;
+	      setTimeout(tryRestore, 100);
+	    }
+	    tryRestore();
+	  });
+	})();
+	</script>
 	<script>try{if(localStorage.get("__framer_force_showing_editorbar_since")){const n=document.createElement("link");n.rel = "modulepreload";n.href="https://framer.com/edit/init.mjs";document.head.appendChild(n)}}catch(e){}</script>
 	<!-- Start of headStart -->
     <!-- Snippet: m9s03GTER -->
@@ -3156,7 +3186,19 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
     <div class="cko__outro">
       <p>Bạn không tạo ra thông tin từ đầu.</p>
       <p>Bạn dùng AI để xác định vấn đề người ta sẵn sàng trả tiền — rồi đóng gói thông tin sẵn có thành sản phẩm họ muốn mua.</p>
-      <div class="cko__cta-mount" id="cko-cta-mount" data-cko-cta-mount></div>
+      <div class="cko__cta-wrap">
+        <div class="cko__cta-mount" id="cko-cta-mount" data-cko-cta-mount></div>
+        <div class="cko__perks">
+          <span class="cko__perk">
+            <svg class="cko__perksvg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7c0-2 1-3 3-3 2 0 3 1 6 1s4-1 6-1 3 1 3 3v3a8 8 0 0 1-9 8 8 8 0 0 1-9-8z"/><circle cx="9" cy="11" r="1.2" fill="currentColor"/><circle cx="15" cy="11" r="1.2" fill="currentColor"/><path d="M9 14.5c1 1 5 1 6 0"/></svg>
+            <span>Không để lộ mặt</span>
+          </span>
+          <span class="cko__perk">
+            <svg class="cko__perksvg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <span>Không cần kinh nghiệm</span>
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -3167,19 +3209,14 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
      click is overridden to smooth-scroll to the registration section. */
   function cloneInto(){
     var mount = document.getElementById('cko-cta-mount');
-    if (!mount || mount.childNodes.length) return false;
+    if (!mount || mount.querySelector('a')) return false;
     var btnStack = document.querySelector('.framer-10ywwfi');
-    var perks = document.querySelector('.framer-1fhyd7f');
-    if (!btnStack || !perks) return false;
+    if (!btnStack) return false;
     var btnClone = btnStack.cloneNode(true);
-    var perksClone = perks.cloneNode(true);
     /* Suffix any IDs to keep the document unique. */
-    [btnClone, perksClone].forEach(function(root){
-      if (root.id) root.id += '-cko';
-      root.querySelectorAll('[id]').forEach(function(el){ el.id += '-cko'; });
-    });
+    if (btnClone.id) btnClone.id += '-cko';
+    btnClone.querySelectorAll('[id]').forEach(function(el){ el.id += '-cko'; });
     mount.appendChild(btnClone);
-    mount.appendChild(perksClone);
     /* Override anchor behavior: smooth-scroll to register section. */
     var dest = document.querySelector('.framer-1jzcc3z');
     btnClone.querySelectorAll('a').forEach(function(a){
@@ -3285,49 +3322,44 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   margin:0 0 14px;
 }
 .cko__outro p:last-of-type{ margin-bottom:30px; }
-.cko__cta-mount{
+.cko__cta-wrap{
   display:flex;
   flex-direction:column;
   align-items:center;
   gap:18px;
   margin-top:6px;
 }
-/* Force flex/align rules on cloned Framer perk rows so icon + text line up
-   (cloned elements lost their original parent's grid/flex context). */
-.cko__cta-mount .framer-1fhyd7f{
-  display:flex !important;
-  flex-wrap:wrap !important;
-  justify-content:center !important;
-  align-items:center !important;
-  gap:24px !important;
-  width:auto !important;
-  position:static !important;
+.cko__cta-mount{ display:flex; justify-content:center; }
+.cko__perks{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:28px;
+  margin:0;
 }
-.cko__cta-mount .framer-1fhyd7f > div{
-  display:inline-flex !important;
-  align-items:center !important;
-  gap:10px !important;
-  position:static !important;
-  width:auto !important;
-  height:auto !important;
+.cko__perk{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-family:"Inter","Inter Placeholder","Manrope",sans-serif;
+  font-size:16px;
+  line-height:1;
+  color:#ffffff;
 }
-.cko__cta-mount .framer-1fhyd7f svg{
-  flex:0 0 auto !important;
-  position:static !important;
-  width:24px !important;
-  height:24px !important;
-}
-.cko__cta-mount .framer-1fhyd7f [data-framer-component-type="RichTextContainer"]{
-  position:static !important;
-  width:auto !important;
-  height:auto !important;
-  transform:none !important;
+.cko__perksvg{
+  flex:0 0 auto;
+  width:22px;
+  height:22px;
+  display:block;
+  color:#a78bfa;
 }
 @media (max-width:639px){
   .cko__outro{ margin-top:36px; }
   .cko__outro p{ font-size:16px; }
-  .cko__cta-mount{ gap:14px; }
-  .cko__cta-mount .framer-1fhyd7f{ gap:18px !important; }
+  .cko__cta-wrap{ gap:14px; }
+  .cko__perks{ gap:18px; font-size:15px; }
+  .cko__perksvg{ width:20px; height:20px; }
 }
 .cmp__heads{
   display:grid;
