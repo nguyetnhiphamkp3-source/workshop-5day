@@ -1,0 +1,7 @@
+name = "workshop-5day"
+compatibility_date = "2025-05-01"
+
+# Serve the repo root as static assets — no build step needed.
+[assets]
+directory = "./"
+not_found_handling = "404-page"
