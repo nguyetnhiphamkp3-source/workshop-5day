@@ -3921,6 +3921,60 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   }
 }
 </style>
+<script data-move-why-listen>
+/* Move "Tại Sao Bạn Nên Lắng Nghe Tôi?" section ABOVE Chi Tiết Chương Trình.
+   Why-Listen is rendered as multiple ssr-variant siblings inside
+   .framer-gmm4pm (AIW Rest of the page), each wrapping a copy of the same
+   content for different breakpoints. We move ALL siblings containing that
+   heading text to before the Section: Details element. */
+(function(){
+  var KEY = 'Tại Sao Bạn Nên Lắng Nghe Tôi';
+  function move(){
+    var aiw = document.querySelector('[data-framer-name="AIW Rest of the page"]');
+    if (!aiw) return false;
+    var details = aiw.querySelector('[data-framer-name="Section: Details"]');
+    if (!details || details.parentNode !== aiw) return false;
+    var current = details.nextElementSibling;
+    while (current){
+      var next = current.nextElementSibling;
+      if (current.textContent && current.textContent.indexOf(KEY) !== -1){
+        try { aiw.insertBefore(current, details); } catch(e){}
+      }
+      current = next;
+    }
+    return true;
+  }
+  function watch(){
+    var aiw = document.querySelector('[data-framer-name="AIW Rest of the page"]');
+    if (!aiw || !('MutationObserver' in window)) return;
+    var pending = false;
+    var obs = new MutationObserver(function(){
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(function(){
+        pending = false;
+        move();
+      });
+    });
+    obs.observe(aiw, {childList:true, subtree:true});
+  }
+  function start(){
+    var tries = 0;
+    var t = setInterval(function(){
+      tries++;
+      if (move() || tries > 80){
+        clearInterval(t);
+        watch();
+      }
+    }, 150);
+  }
+  if (document.readyState === 'complete'){
+    start();
+  } else {
+    window.addEventListener('load', start);
+  }
+})();
+</script>
 <script data-chitiet>
 /* "Chi Tiết Chương Trình" — update first 3 cards' content + clone a 4th
    card (TẠI SAO) after the 3rd. The 3 cards live deep in Framer's tree,
