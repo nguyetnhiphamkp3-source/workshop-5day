@@ -3855,6 +3855,25 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 })();
 </script>
 
+<style data-section-dividers>
+/* Thin horizontal divider line between sections from section 1 (wn) onward.
+   Applied as border-top so it sits at the boundary between sections. */
+.framer-71ANT [data-framer-name^="LP - "],
+.framer-71ANT [data-framer-name^="Section:"],
+.wn,
+.lt,
+.fb,
+.fbi,
+.cko,
+.disc,
+.why{
+  border-top:1px solid rgba(255,255,255,0.10) !important;
+}
+/* Don't show divider above hidden sections (already display:none, but be safe). */
+.framer-71ANT [data-framer-name="LP - Event Dates"]{
+  border-top:0 !important;
+}
+</style>
 <style data-hide-event-dates>
 /* Hide the "Tất Cả Những Gì Có Trong 5 Ngày Thử Thách" section
    (NGÀY 1-5 calendar grid) — user removed it. */
