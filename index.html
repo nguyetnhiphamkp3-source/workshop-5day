@@ -3855,6 +3855,88 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 })();
 </script>
 
+<script data-chitiet>
+/* "Chi Tiết Chương Trình" — update first 3 cards' content + clone a 4th
+   card (TẠI SAO) after the 3rd. The 3 cards live deep in Framer's tree,
+   so we update via DOM after hydration with a MutationObserver to re-apply
+   if React reconciles. */
+(function(){
+  var WANT = [
+    { h: 'CÁI GÌ', p: 'Thử thách hoàn toàn miễn phí 5 ngày và được thiết kế để giúp bạn bắt đầu từng bước kiếm tiền trực tuyến bằng AI.' },
+    { h: 'KHI NÀO', p: 'Chương trình kéo dài 5 ngày (bắt đầu từ 11.05.2026) và sẽ diễn ra trong khoảng 1 giờ mỗi ngày, bắt đầu lúc 19h30 giờ Việt Nam.' },
+    { h: 'AI', p: 'Dành cho bất cứ ai muốn kiếm tiền trực tuyến bằng AI mà không cần lộ mặt hoặc trở thành chuyên gia.' }
+  ];
+  var FOURTH = { h: 'TẠI SAO', p: 'Bởi vì AI đã tạo ra một cơ hội mới cho những người hoàn toàn chưa có kinh nghiệm để kiếm được thu nhập thay đổi cuộc sống thông qua mạng.' };
+  var MARK = 'data-tai-sao-card';
+
+  function applyUpdates(){
+    var sel = '.framer-jm8b6m[data-framer-name="Sub Container"], .framer-1o7mf78[data-framer-name="Sub Container"], .framer-1b98i3o[data-framer-name="Sub Container"]';
+    var all = document.querySelectorAll(sel);
+    /* Exclude our own cloned card (it inherits framer-1b98i3o class from 3rd). */
+    var orig = [];
+    for (var i = 0; i < all.length; i++){
+      if (!all[i].hasAttribute(MARK)) orig.push(all[i]);
+    }
+    if (orig.length < 3) return false;
+
+    for (var j = 0; j < 3; j++){
+      var card = orig[j];
+      var h2 = card.querySelector('h2');
+      if (h2 && h2.textContent.trim() !== WANT[j].h){
+        h2.textContent = WANT[j].h;
+      }
+      var p = card.querySelector('p');
+      if (p && p.textContent.trim() !== WANT[j].p){
+        p.textContent = WANT[j].p;
+      }
+    }
+
+    if (!document.querySelector('[' + MARK + ']')){
+      var third = orig[2];
+      var fourth = third.cloneNode(true);
+      fourth.setAttribute(MARK, '');
+      var h4 = fourth.querySelector('h2');
+      if (h4) h4.textContent = FOURTH.h;
+      var p4 = fourth.querySelector('p');
+      if (p4) p4.textContent = FOURTH.p;
+      third.parentNode.insertBefore(fourth, third.nextSibling);
+    }
+    return true;
+  }
+
+  function watch(){
+    var section = document.querySelector('[data-framer-name="Section: Details"]');
+    if (!section || !('MutationObserver' in window)) return;
+    var pending = false;
+    var obs = new MutationObserver(function(){
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(function(){
+        pending = false;
+        applyUpdates();
+      });
+    });
+    obs.observe(section, {childList:true, subtree:true});
+  }
+
+  function start(){
+    var tries = 0;
+    var t = setInterval(function(){
+      tries++;
+      if (applyUpdates() || tries > 80){
+        clearInterval(t);
+        watch();
+      }
+    }, 150);
+  }
+  if (document.readyState === 'complete'){
+    start();
+  } else {
+    window.addEventListener('load', start);
+  }
+})();
+</script>
+
 <!-- ============================================================
      FAQ Section — outside Framer hydration so it persists.
      Tone: black bg + warm orange/gold accents to match site.
