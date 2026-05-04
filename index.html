@@ -3123,6 +3123,35 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
     </ul>
     <p class="cko__close">Và họ sẵn sàng trả tiền cho người giúp họ giải quyết.</p>
     <p class="cko__close">Thông tin để giải quyết những vấn đề này đều có trên internet — miễn phí. Nhưng nó nằm rải rác khắp nơi, lộn xộn và khó dùng.</p>
+
+    <div class="cko__compare" aria-label="So sánh cách cũ và cách mới với AI">
+      <div class="cmp__heads">
+        <h3 class="cmp__head">Kiếm tiền online theo cách cũ đòi hỏi:</h3>
+        <h3 class="cmp__head">Bây giờ, AI có thể làm tất cả những điều đó thay bạn:</h3>
+      </div>
+      <div class="cmp__rows">
+        <div class="cmp__row">
+          <div class="cmp__cell cmp__cell--old"><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Nhiều năm tích lũy chuyên môn trong một lĩnh vực cụ thể</span></div>
+          <div class="cmp__cell cmp__cell--new"><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Quét hàng nghìn nguồn thông tin trong vài phút</span></div>
+        </div>
+        <div class="cmp__row">
+          <div class="cmp__cell cmp__cell--old"><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Tự tạo sản phẩm từ đầu — và hy vọng nó bán được</span></div>
+          <div class="cmp__cell cmp__cell--new"><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Xác định chính xác vấn đề người ta sẵn sàng trả tiền để giải quyết</span></div>
+        </div>
+        <div class="cmp__row">
+          <div class="cmp__cell cmp__cell--old"><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Xây dựng lượng người theo dõi trước khi có doanh thu</span></div>
+          <div class="cmp__cell cmp__cell--new"><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Tổng hợp và đóng gói thành sản phẩm kỹ thuật số hoàn chỉnh</span></div>
+        </div>
+        <div class="cmp__row">
+          <div class="cmp__cell cmp__cell--old"><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Thuê team: designer, copywriter, kỹ thuật viên</span></div>
+          <div class="cmp__cell cmp__cell--new"><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Viết nội dung bán hàng, email, quảng cáo</span></div>
+        </div>
+        <div class="cmp__row">
+          <div class="cmp__cell cmp__cell--old"><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Biết làm video, thiết kế, viết lách</span></div>
+          <div class="cmp__cell cmp__cell--new"><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Gần như không cần kỹ năng kỹ thuật — chỉ cần biết cách ra lệnh đúng</span></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 <script data-cko>
@@ -3171,17 +3200,16 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 </script>
 
 <!-- ============================================================
-     "Cách cũ vs AI" 2-column comparison — sits after cko section.
+     "Cách cũ vs AI" — comparison block, NESTED inside cko section
+     (no longer a standalone section). Outer wrapper card via .cko__compare.
      ============================================================ -->
 <style data-cmp>
-.cmp{
-  background:#000;
-  padding:48px 24px 80px;
-  font-family:"Inter Display","Inter Display Placeholder","Inter","Inter Placeholder",sans-serif;
-}
-.cmp__container{
-  max-width:1100px;
-  margin:0 auto;
+.cko__compare{
+  margin:40px auto 0;
+  padding:32px 28px;
+  background:linear-gradient(180deg, rgba(20,16,40,0.45) 0%, rgba(10,8,20,0.55) 100%);
+  border:1px solid rgba(190,180,255,0.16);
+  border-radius:22px;
 }
 .cmp__heads{
   display:grid;
@@ -3264,7 +3292,7 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 }
 .cmp__text{ flex:1 1 auto; }
 @media (max-width:760px){
-  .cmp{ padding:32px 16px 56px; }
+  .cko__compare{ margin-top:28px; padding:20px 16px; border-radius:18px; }
   .cmp__heads{ grid-template-columns:1fr; gap:10px; margin-bottom:16px; }
   .cmp__head{ font-size:16px; }
   .cmp__rows{ gap:18px; }
@@ -3283,81 +3311,6 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   .cmp__icon{ width:20px; height:20px; font-size:12px; }
 }
 </style>
-<section class="cmp" id="cmp-section" aria-label="So sánh cách cũ và cách mới với AI">
-  <div class="cmp__container">
-    <div class="cmp__heads">
-      <h3 class="cmp__head">Kiếm tiền online theo cách cũ đòi hỏi:</h3>
-      <h3 class="cmp__head">Bây giờ, AI có thể làm tất cả những điều đó thay bạn:</h3>
-    </div>
-    <div class="cmp__rows">
-      <div class="cmp__row">
-        <div class="cmp__cell cmp__cell--old"><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Nhiều năm tích lũy chuyên môn trong một lĩnh vực cụ thể</span></div>
-        <div class="cmp__cell cmp__cell--new"><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Quét hàng nghìn nguồn thông tin trong vài phút</span></div>
-      </div>
-      <div class="cmp__row">
-        <div class="cmp__cell cmp__cell--old"><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Tự tạo sản phẩm từ đầu — và hy vọng nó bán được</span></div>
-        <div class="cmp__cell cmp__cell--new"><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Xác định chính xác vấn đề người ta sẵn sàng trả tiền để giải quyết</span></div>
-      </div>
-      <div class="cmp__row">
-        <div class="cmp__cell cmp__cell--old"><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Xây dựng lượng người theo dõi trước khi có doanh thu</span></div>
-        <div class="cmp__cell cmp__cell--new"><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Tổng hợp và đóng gói thành sản phẩm kỹ thuật số hoàn chỉnh</span></div>
-      </div>
-      <div class="cmp__row">
-        <div class="cmp__cell cmp__cell--old"><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Thuê team: designer, copywriter, kỹ thuật viên</span></div>
-        <div class="cmp__cell cmp__cell--new"><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Viết nội dung bán hàng, email, quảng cáo</span></div>
-      </div>
-      <div class="cmp__row">
-        <div class="cmp__cell cmp__cell--old"><span class="cmp__icon cmp__icon--x" aria-hidden="true">✕</span><span class="cmp__text">Biết làm video, thiết kế, viết lách</span></div>
-        <div class="cmp__cell cmp__cell--new"><span class="cmp__icon cmp__icon--check" aria-hidden="true">✓</span><span class="cmp__text">Gần như không cần kỹ năng kỹ thuật — chỉ cần biết cách ra lệnh đúng</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-<script data-cmp>
-(function(){
-  function move(){
-    var cmp = document.getElementById('cmp-section');
-    var cko = document.getElementById('cko-section');
-    var hero = document.querySelector('.framer-3zt6nn');
-    if (!cmp || !cko || !hero || !hero.parentNode) return false;
-    if (cko.parentNode !== hero.parentNode) return false;
-    if (cko.nextElementSibling !== cmp){
-      cko.parentNode.insertBefore(cmp, cko.nextElementSibling);
-    }
-    return true;
-  }
-  function watch(){
-    var hero = document.querySelector('.framer-3zt6nn');
-    var cko = document.getElementById('cko-section');
-    var cmp = document.getElementById('cmp-section');
-    if (!hero || !hero.parentNode || !cko || !cmp || !('MutationObserver' in window)) return;
-    var parent = hero.parentNode;
-    var obs = new MutationObserver(function(){
-      if (cko.parentNode !== parent) return;
-      if (cko.nextElementSibling !== cmp && document.contains(cko)){
-        try { parent.insertBefore(cmp, cko.nextElementSibling); } catch(e){}
-      }
-    });
-    obs.observe(parent, {childList:true});
-  }
-  function start(){
-    var tries = 0;
-    var t = setInterval(function(){
-      tries++;
-      if (move() || tries > 80){
-        clearInterval(t);
-        watch();
-      }
-    }, 150);
-  }
-  if (document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', start);
-  } else {
-    start();
-  }
-})();
-</script>
-
 <!-- ============================================================
      FAQ Section — outside Framer hydration so it persists.
      Tone: black bg + warm orange/gold accents to match site.
