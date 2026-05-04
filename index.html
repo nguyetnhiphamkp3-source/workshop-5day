@@ -3292,11 +3292,42 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   gap:18px;
   margin-top:6px;
 }
-.cko__cta-mount > *{ margin:0 auto; }
+/* Force flex/align rules on cloned Framer perk rows so icon + text line up
+   (cloned elements lost their original parent's grid/flex context). */
+.cko__cta-mount .framer-1fhyd7f{
+  display:flex !important;
+  flex-wrap:wrap !important;
+  justify-content:center !important;
+  align-items:center !important;
+  gap:24px !important;
+  width:auto !important;
+  position:static !important;
+}
+.cko__cta-mount .framer-1fhyd7f > div{
+  display:inline-flex !important;
+  align-items:center !important;
+  gap:10px !important;
+  position:static !important;
+  width:auto !important;
+  height:auto !important;
+}
+.cko__cta-mount .framer-1fhyd7f svg{
+  flex:0 0 auto !important;
+  position:static !important;
+  width:24px !important;
+  height:24px !important;
+}
+.cko__cta-mount .framer-1fhyd7f [data-framer-component-type="RichTextContainer"]{
+  position:static !important;
+  width:auto !important;
+  height:auto !important;
+  transform:none !important;
+}
 @media (max-width:639px){
   .cko__outro{ margin-top:36px; }
   .cko__outro p{ font-size:16px; }
   .cko__cta-mount{ gap:14px; }
+  .cko__cta-mount .framer-1fhyd7f{ gap:18px !important; }
 }
 .cmp__heads{
   display:grid;
