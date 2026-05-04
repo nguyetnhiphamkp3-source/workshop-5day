@@ -3036,7 +3036,7 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   font-family:"Inter Display","Inter Display Placeholder","Inter","Inter Placeholder",sans-serif;
 }
 .cko__container{
-  max-width:740px;
+  max-width:900px;
   margin:0 auto;
 }
 .cko__title{
@@ -3061,30 +3061,42 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 .cko__list{
   list-style:none;
   padding:0;
-  margin:0 auto 26px;
-  max-width:560px;
+  margin:0 auto 28px;
+  max-width:640px;
   display:flex;
   flex-direction:column;
-  gap:12px;
+  gap:14px;
 }
 .cko__list li{
   font-family:"Inter","Inter Placeholder","Manrope",sans-serif;
   font-size:18px;
-  line-height:1.55;
+  line-height:1.5;
   color:#ffffff;
-  padding-left:24px;
-  position:relative;
   text-align:left;
+  position:relative;
+  padding:16px 20px 16px 64px;
+  background:rgba(22,18,40,0.40);
+  border:1px solid rgba(190,180,255,0.16);
+  border-radius:14px;
 }
 .cko__list li::before{
-  content:"";
+  content:"?";
   position:absolute;
-  left:4px;
-  top:11px;
-  width:8px;
-  height:8px;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
+  width:32px;
+  height:32px;
   border-radius:50%;
-  background:#a78bfa;
+  background:rgba(139,92,246,0.18);
+  border:1px solid rgba(190,180,255,0.35);
+  color:#a78bfa;
+  font-family:"Inter Display","Inter Display Placeholder","Inter",sans-serif;
+  font-weight:700;
+  font-size:17px;
+  display:grid;
+  place-items:center;
+  line-height:1;
 }
 .cko__close{ margin-bottom:14px; }
 .cko__close:last-child{ margin-bottom:0; }
@@ -3094,8 +3106,8 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   .cko__intro,
   .cko__close,
   .cko__list li{ font-size:16px; }
-  .cko__list li{ padding-left:20px; }
-  .cko__list li::before{ width:7px; height:7px; top:10px; left:4px; }
+  .cko__list li{ padding:14px 16px 14px 54px; }
+  .cko__list li::before{ width:28px; height:28px; left:13px; font-size:15px; }
 }
 </style>
 <section class="cko" id="cko-section" aria-labelledby="cko-title">
