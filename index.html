@@ -3862,6 +3862,49 @@ html, body{
   overflow-x:hidden !important;
 }
 </style>
+<style data-mobile-sync>
+/* Mobile sync (≤639px) — user-requested unified spacing & typography:
+   • 50px top/bottom on each section → ~100px gap between sections
+   • 20px side padding (was 16)
+   • All section titles 30px with text-wrap:balance to avoid orphan words
+   • Body text 15px
+   • fb↔fbi pair stays tight (16px between, since they're conceptually one) */
+@media (max-width:639px){
+  .wn, .lt, .fb, .fbi, .cko, .disc, .why{
+    padding-left:20px !important;
+    padding-right:20px !important;
+    padding-top:50px !important;
+    padding-bottom:50px !important;
+  }
+  .fb{ padding-bottom:16px !important; }
+  .fbi{ padding-top:16px !important; }
+
+  .wn__title,
+  .fb__title,
+  .fbi__title,
+  .cko__title,
+  .disc__title,
+  .why__title{
+    font-size:30px !important;
+    line-height:1.2 !important;
+    text-wrap:balance;
+  }
+  /* Drop hard <br> in fb title on mobile so wrap is natural+balanced. */
+  .fb__title br{ display:none !important; }
+
+  .wn__carddesc,
+  .lt__head, .lt__meta, .lt__body p, .lt__signature,
+  .fb__subtitle, .fb__caption,
+  .fbi__outro p,
+  .cko__intro, .cko__close, .cko__list li,
+  .cmp__head, .cmp__cell,
+  .disc__close, .disc__list li,
+  .why__body p{
+    font-size:15px !important;
+    line-height:1.6 !important;
+  }
+}
+</style>
 <style data-section-dividers>
 /* Single divider just above the Footer — clone of Framer's
    .framer-1kvpksr "seperation line" style: 4px-tall violet radial gradient
