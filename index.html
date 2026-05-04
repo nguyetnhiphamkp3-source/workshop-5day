@@ -3684,6 +3684,178 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 </script>
 
 <!-- ============================================================
+     "Nếu Chương Trình Này Có Giá Trị Như Vậy, Tại Sao Lại Miễn Phí?"
+     2-column section (text left, photo right), sits after disc section.
+     Reuses hero CTA via clone, photo from assets/dear.jpg.
+     ============================================================ -->
+<style data-why>
+.why{
+  background:#000;
+  padding:32px 24px 80px;
+  font-family:"Inter Display","Inter Display Placeholder","Inter","Inter Placeholder",sans-serif;
+}
+.why__container{
+  max-width:1000px;
+  margin:0 auto;
+}
+.why__card{
+  background:
+    repeating-linear-gradient(135deg,
+      rgba(255,255,255,0.035) 0 1px,
+      transparent 1px 14px),
+    linear-gradient(180deg, rgba(18,14,38,0.85) 0%, rgba(8,6,20,0.95) 100%);
+  border:1px solid rgba(190,180,255,0.18);
+  border-radius:24px;
+  padding:40px 36px;
+  display:grid;
+  grid-template-columns:1.05fr 1fr;
+  gap:36px;
+  align-items:stretch;
+}
+.why__content{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+  min-width:0;
+}
+.why__title{
+  font-family:"Inter Display","Inter Display Placeholder","Inter",sans-serif;
+  font-style:italic;
+  font-weight:700;
+  font-size:24px;
+  line-height:1.35;
+  color:#ffffff;
+  margin:0;
+}
+.why__body{ display:flex; flex-direction:column; gap:14px; }
+.why__body p{
+  font-family:"Inter","Inter Placeholder","Manrope",sans-serif;
+  font-size:16px;
+  line-height:1.7;
+  color:#ffffff;
+  margin:0;
+}
+.why__body strong{ color:#ffffff; font-weight:700; }
+.why__cta-mount{
+  display:flex;
+  justify-content:flex-start;
+  margin-top:6px;
+}
+.why__photo{
+  position:relative;
+  width:100%;
+  min-height:480px;
+  border-radius:20px;
+  background:#0d0a18 url('assets/dear.jpg') center/cover no-repeat;
+}
+@media (max-width:759px){
+  .why{ padding:24px 16px 64px; }
+  .why__card{ padding:24px 18px; grid-template-columns:1fr; gap:24px; }
+  .why__title{ font-size:20px; }
+  .why__body p{ font-size:15px; }
+  .why__photo{ min-height:300px; order:-1; }
+  .why__cta-mount{ justify-content:center; }
+}
+</style>
+<section class="why" id="why-section" aria-labelledby="why-title">
+  <div class="why__container">
+    <div class="why__card">
+      <div class="why__content">
+        <h2 class="why__title" id="why-title">Nếu Chương Trình Này Có Giá Trị Như Vậy, Tại Sao Lại Miễn Phí?</h2>
+        <div class="why__body">
+          <p>Câu hỏi trung thực — và tôi sẽ trả lời thẳng.</p>
+          <p>Tôi hướng dẫn miễn phí không phải vì tôi không có gì để bán.</p>
+          <p>Tôi hướng dẫn miễn phí vì <strong>tôi cần bạn thành công trước.</strong></p>
+          <p>Đây là lý do thực sự:</p>
+          <p>Tôi đang xây dựng một chương trình đào tạo hoàn chỉnh về kiếm tiền online bằng AI. Chương trình này sẽ được đóng gói dựa trên <strong>phản hồi thực tế từ hàng trăm người đã áp dụng</strong> — không phải lý thuyết trên giấy.</p>
+          <p>5 ngày thử thách này chính là nơi tôi thu thập những phản hồi đó.</p>
+          <p>Khi bạn tham gia, thực hành và chia sẻ kết quả — bạn đang giúp tôi kiểm chứng hệ thống, và tôi giúp bạn có thu nhập thực tế.</p>
+          <p><strong>Mục tiêu của tôi gắn liền với mục tiêu của bạn.</strong></p>
+          <p>Miễn phí không có nghĩa là kém giá trị. Những gì bạn nhận được trong 5 ngày này — nhiều người trả tiền triệu để tham gia — vẫn chưa chắc hướng dẫn được bài bản như thế này.</p>
+          <p><strong>Đây là cơ hội của bạn. Hãy tận dụng nó.</strong></p>
+        </div>
+        <div class="why__cta-mount" id="why-cta-mount" data-why-cta-mount></div>
+      </div>
+      <div class="why__photo" role="img" aria-label="Dương Trọng Nghĩa làm việc"></div>
+    </div>
+  </div>
+</section>
+<script data-why>
+(function(){
+  function cloneCta(){
+    var mount = document.getElementById('why-cta-mount');
+    if (!mount || mount.querySelector('a')) return false;
+    var btnStack = document.querySelector('.framer-10ywwfi');
+    if (!btnStack) return false;
+    var btnClone = btnStack.cloneNode(true);
+    if (btnClone.id) btnClone.id += '-why';
+    btnClone.querySelectorAll('[id]').forEach(function(el){ el.id += '-why'; });
+    mount.appendChild(btnClone);
+    var dest = document.querySelector('.framer-1jzcc3z');
+    btnClone.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(e){
+        if (!dest) return;
+        e.preventDefault();
+        dest.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+    return true;
+  }
+  function move(){
+    var why = document.getElementById('why-section');
+    var disc = document.getElementById('disc-section');
+    var hero = document.querySelector('.framer-3zt6nn');
+    if (!why || !disc || !hero || !hero.parentNode) return false;
+    if (disc.parentNode !== hero.parentNode) return false;
+    if (disc.nextElementSibling !== why){
+      disc.parentNode.insertBefore(why, disc.nextElementSibling);
+    }
+    return true;
+  }
+  function watchPos(){
+    var hero = document.querySelector('.framer-3zt6nn');
+    var disc = document.getElementById('disc-section');
+    var why = document.getElementById('why-section');
+    if (!hero || !hero.parentNode || !disc || !why || !('MutationObserver' in window)) return;
+    var parent = hero.parentNode;
+    var obs = new MutationObserver(function(){
+      if (disc.parentNode !== parent) return;
+      if (disc.nextElementSibling !== why && document.contains(disc)){
+        try { parent.insertBefore(why, disc.nextElementSibling); } catch(e){}
+      }
+    });
+    obs.observe(parent, {childList:true});
+  }
+  function watchCta(){
+    var mount = document.getElementById('why-cta-mount');
+    if (!mount || !('MutationObserver' in window)) return;
+    var obs = new MutationObserver(function(){
+      if (!mount.querySelector('a')) cloneCta();
+    });
+    obs.observe(mount, {childList:true});
+  }
+  function start(){
+    var tries = 0, movedOk = false, ctaOk = false;
+    var t = setInterval(function(){
+      tries++;
+      if (!movedOk) movedOk = move();
+      if (!ctaOk) ctaOk = cloneCta();
+      if ((movedOk && ctaOk) || tries > 80){
+        clearInterval(t);
+        watchPos();
+        watchCta();
+      }
+    }, 150);
+  }
+  if (document.readyState === 'complete'){
+    start();
+  } else {
+    window.addEventListener('load', start);
+  }
+})();
+</script>
+
+<!-- ============================================================
      FAQ Section — outside Framer hydration so it persists.
      Tone: black bg + warm orange/gold accents to match site.
      ============================================================ -->
