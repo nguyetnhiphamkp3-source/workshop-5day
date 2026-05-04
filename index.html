@@ -3855,6 +3855,13 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 })();
 </script>
 
+<style data-no-horizontal-scroll>
+/* Prevent any horizontal overflow from full-bleed sections (100vw vs body
+   width when a vertical scrollbar is present) creating a bottom h-scrollbar. */
+html, body{
+  overflow-x:hidden !important;
+}
+</style>
 <style data-section-dividers>
 /* Single divider just above the Footer — clone of Framer's
    .framer-1kvpksr "seperation line" style: 4px-tall violet radial gradient
