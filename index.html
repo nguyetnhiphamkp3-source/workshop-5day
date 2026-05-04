@@ -3942,12 +3942,19 @@ html, body{
   .fb__subtitle, .fb__caption,
   .fbi__outro p,
   .cko__intro, .cko__close, .cko__list li,
-  .cmp__head, .cmp__cell,
+  .cmp__cell,
   .disc__close, .disc__list li,
   .why__body p{
     font-size:15px !important;
     line-height:1.6 !important;
   }
+  /* Comparison column headers: 18px + balanced wrap, drop hard <br>. */
+  .cmp__head{
+    font-size:18px !important;
+    line-height:1.4 !important;
+    text-wrap:balance;
+  }
+  .cmp__head br{ display:none !important; }
 }
 </style>
 <style data-hide-event-dates>
