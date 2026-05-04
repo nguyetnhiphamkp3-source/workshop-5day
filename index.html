@@ -3462,6 +3462,229 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 }
 </style>
 <!-- ============================================================
+     "Đây Là Những Gì Bạn Sẽ Khám Phá Trong 5 Ngày" Section — sits
+     after cko. Title block (striped violet) overlaps into body card.
+     Reuses hero's CTA button via clone.
+     ============================================================ -->
+<style data-disc>
+.disc{
+  background:#000;
+  padding:32px 24px 80px;
+  font-family:"Inter Display","Inter Display Placeholder","Inter","Inter Placeholder",sans-serif;
+}
+.disc__container{
+  max-width:900px;
+  margin:0 auto;
+}
+.disc__head{
+  position:relative;
+  z-index:2;
+  max-width:780px;
+  margin:0 auto -34px;
+  padding:32px 28px;
+  text-align:center;
+  border-radius:22px;
+  border:1px solid rgba(167,139,250,0.40);
+  background:
+    repeating-linear-gradient(135deg,
+      rgba(255,255,255,0.06) 0 1px,
+      transparent 1px 10px),
+    linear-gradient(135deg, rgba(70,46,160,0.75) 0%, rgba(48,28,120,0.88) 100%);
+  box-shadow:0 10px 30px rgba(70,46,160,0.20);
+}
+.disc__title{
+  font-family:"Inter Display","Inter Display Placeholder","Inter",sans-serif;
+  font-weight:700;
+  font-size:30px;
+  line-height:1.3;
+  color:#ffffff;
+  margin:0;
+}
+.disc__body{
+  position:relative;
+  z-index:1;
+  background:linear-gradient(180deg, rgba(18,14,38,0.85) 0%, rgba(8,6,20,0.95) 100%);
+  border:1px solid rgba(190,180,255,0.18);
+  border-radius:24px;
+  padding:66px 36px 36px;
+}
+.disc__list{
+  list-style:none;
+  padding:0;
+  margin:0 0 28px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+.disc__list li{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  font-family:"Inter","Inter Placeholder","Manrope",sans-serif;
+  font-size:17px;
+  line-height:1.6;
+  color:#ffffff;
+}
+.disc__check{
+  flex:0 0 auto;
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  background:rgba(167,139,250,0.16);
+  border:1px solid rgba(167,139,250,0.55);
+  color:#c4b5fd;
+  display:grid;
+  place-items:center;
+  margin-top:2px;
+}
+.disc__check svg{ width:14px; height:14px; display:block; }
+.disc__list strong{
+  color:#ffffff;
+  font-weight:700;
+}
+.disc__close{
+  font-family:"Inter","Inter Placeholder","Manrope",sans-serif;
+  font-size:18px;
+  line-height:1.6;
+  color:#ffffff;
+  text-align:center;
+  margin:0 0 28px;
+}
+.disc__highlight{
+  color:#c4b5fd;
+  font-weight:700;
+}
+.disc__cta-mount{ display:flex; justify-content:center; }
+@media (max-width:639px){
+  .disc{ padding:24px 16px 64px; }
+  .disc__head{ padding:22px 18px; border-radius:18px; margin-bottom:-28px; }
+  .disc__title{ font-size:22px; }
+  .disc__body{ padding:50px 18px 28px; border-radius:18px; }
+  .disc__list{ gap:16px; }
+  .disc__list li{ font-size:15px; gap:10px; }
+  .disc__check{ width:22px; height:22px; }
+  .disc__check svg{ width:12px; height:12px; }
+  .disc__close{ font-size:16px; }
+}
+</style>
+<section class="disc" id="disc-section" aria-labelledby="disc-title">
+  <div class="disc__container">
+    <div class="disc__head">
+      <h2 class="disc__title" id="disc-title">Đây Là Những Gì Bạn Sẽ Khám Phá Trong 5 Ngày:</h2>
+    </div>
+    <div class="disc__body">
+      <ul class="disc__list">
+        <li>
+          <span class="disc__check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span><strong>Cách tìm sản phẩm số có lợi nhuận bằng AI</strong> — chiến lược này giúp bạn xác định vấn đề người ta đang tích cực tìm kiếm và sẵn sàng trả tiền ngay.</span>
+        </li>
+        <li>
+          <span class="disc__check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span><strong>Cách dùng AI để xác nhận ý tưởng sản phẩm chỉ trong vài phút</strong> — để bạn không bao giờ mất thời gian xây sản phẩm mà không ai mua.</span>
+        </li>
+        <li>
+          <span class="disc__check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span><strong>Cách tạo sản phẩm số đẳng cấp mà không cần là chuyên gia</strong> — AI thu thập, tổng hợp và tổ chức thông tin cho bạn.</span>
+        </li>
+        <li>
+          <span class="disc__check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span><strong>Bạn có thể tạo ra sản phẩm hoàn chỉnh chỉ trong vài giờ không cần kinh nghiệm?</strong> — Tôi sẽ chỉ bạn quy trình chính xác từng bước.</span>
+        </li>
+        <li>
+          <span class="disc__check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span><strong>Cách tìm đúng "đám đông đói khát"</strong> — những người đang chủ động tìm kiếm sản phẩm của bạn — đây là nơi cuối cùng hầu hết mọi người nhìn vào, nhưng lại rõ ràng đến ngạc nhiên.</span>
+        </li>
+        <li>
+          <span class="disc__check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span><strong>Bí quyết kiếm tiền mà không cần lộ mặt</strong> — chiến lược đơn giản này cho phép bạn xây dựng thu nhập hoàn toàn ẩn danh.</span>
+        </li>
+        <li>
+          <span class="disc__check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span><strong>Cách khiến người ta trả tiền cho bạn dù bạn là người mới hoàn toàn</strong> — không cần uy tín, không cần thương hiệu cá nhân.</span>
+        </li>
+      </ul>
+      <p class="disc__close">Và tất cả những điều này — tôi chia sẻ hoàn toàn <strong class="disc__highlight">MIỄN PHÍ</strong>.</p>
+      <div class="disc__cta-mount" id="disc-cta-mount" data-disc-cta-mount></div>
+    </div>
+  </div>
+</section>
+<script data-disc>
+(function(){
+  function cloneCta(){
+    var mount = document.getElementById('disc-cta-mount');
+    if (!mount || mount.querySelector('a')) return false;
+    var btnStack = document.querySelector('.framer-10ywwfi');
+    if (!btnStack) return false;
+    var btnClone = btnStack.cloneNode(true);
+    if (btnClone.id) btnClone.id += '-disc';
+    btnClone.querySelectorAll('[id]').forEach(function(el){ el.id += '-disc'; });
+    mount.appendChild(btnClone);
+    var dest = document.querySelector('.framer-1jzcc3z');
+    btnClone.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(e){
+        if (!dest) return;
+        e.preventDefault();
+        dest.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+    return true;
+  }
+  function move(){
+    var disc = document.getElementById('disc-section');
+    var cko = document.getElementById('cko-section');
+    var hero = document.querySelector('.framer-3zt6nn');
+    if (!disc || !cko || !hero || !hero.parentNode) return false;
+    if (cko.parentNode !== hero.parentNode) return false;
+    if (cko.nextElementSibling !== disc){
+      cko.parentNode.insertBefore(disc, cko.nextElementSibling);
+    }
+    return true;
+  }
+  function watchPos(){
+    var hero = document.querySelector('.framer-3zt6nn');
+    var cko = document.getElementById('cko-section');
+    var disc = document.getElementById('disc-section');
+    if (!hero || !hero.parentNode || !cko || !disc || !('MutationObserver' in window)) return;
+    var parent = hero.parentNode;
+    var obs = new MutationObserver(function(){
+      if (cko.parentNode !== parent) return;
+      if (cko.nextElementSibling !== disc && document.contains(cko)){
+        try { parent.insertBefore(disc, cko.nextElementSibling); } catch(e){}
+      }
+    });
+    obs.observe(parent, {childList:true});
+  }
+  function watchCta(){
+    var mount = document.getElementById('disc-cta-mount');
+    if (!mount || !('MutationObserver' in window)) return;
+    var obs = new MutationObserver(function(){
+      if (!mount.querySelector('a')) cloneCta();
+    });
+    obs.observe(mount, {childList:true});
+  }
+  function start(){
+    var tries = 0;
+    var movedOk = false, ctaOk = false;
+    var t = setInterval(function(){
+      tries++;
+      if (!movedOk) movedOk = move();
+      if (!ctaOk) ctaOk = cloneCta();
+      if ((movedOk && ctaOk) || tries > 80){
+        clearInterval(t);
+        watchPos();
+        watchCta();
+      }
+    }, 150);
+  }
+  if (document.readyState === 'complete'){
+    start();
+  } else {
+    window.addEventListener('load', start);
+  }
+})();
+</script>
+
+<!-- ============================================================
      FAQ Section — outside Framer hydration so it persists.
      Tone: black bg + warm orange/gold accents to match site.
      ============================================================ -->
