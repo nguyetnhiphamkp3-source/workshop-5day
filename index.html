@@ -4006,8 +4006,8 @@ html, body{
 
   /* Lucide-style outline SVG glyphs to replace the AI / TẠI SAO card icons. */
   var ICONS = {
-    users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
-    help:  '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" x2="12.01" y1="17" y2="17"/>'
+    cpu:  '<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/>',
+    help: '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" x2="12.01" y1="17" y2="17"/>'
   };
   function setIcon(card, type){
     var svg = card && card.querySelector('svg');
@@ -4056,8 +4056,8 @@ html, body{
       third.parentNode.insertBefore(fourth, third.nextSibling);
     }
 
-    /* Swap icons on AI (people) + TẠI SAO (help-circle) cards. */
-    setIcon(orig[2], 'users');
+    /* Swap icons on AI (cpu chip = Artificial Intelligence) + TẠI SAO (help-circle) cards. */
+    setIcon(orig[2], 'cpu');
     var fourthEl = document.querySelector('[' + MARK + ']');
     if (fourthEl) setIcon(fourthEl, 'help');
     return true;
