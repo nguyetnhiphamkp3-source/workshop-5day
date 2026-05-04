@@ -2959,22 +2959,30 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
     });
   }
 
-  /* Position section right after Video Feedback (#fb-section). */
+  /* Position section right after Video Feedback (#fb-section).
+     Wait until fb is settled in Framer's main parent (sibling of Hero) —
+     fb itself is moved by another observer, so until then fb.parentNode
+     is still <body> (raw initial DOM). Acting too early would land fbi
+     in body, never re-checked. */
   function move(){
     var fbi = document.getElementById('fbi-section');
     var fb = document.getElementById('fb-section');
-    if (!fbi || !fb || !fb.parentNode) return false;
+    var hero = document.querySelector('.framer-3zt6nn');
+    if (!fbi || !fb || !hero || !hero.parentNode) return false;
+    if (fb.parentNode !== hero.parentNode) return false; // fb hasn't moved yet
     if (fb.nextElementSibling !== fbi){
       fb.parentNode.insertBefore(fbi, fb.nextElementSibling);
     }
     return true;
   }
   function watch(){
+    var hero = document.querySelector('.framer-3zt6nn');
     var fb = document.getElementById('fb-section');
     var fbi = document.getElementById('fbi-section');
-    if (!fb || !fb.parentNode || !fbi || !('MutationObserver' in window)) return;
-    var parent = fb.parentNode;
+    if (!hero || !hero.parentNode || !fb || !fbi || !('MutationObserver' in window)) return;
+    var parent = hero.parentNode;
     var obs = new MutationObserver(function(){
+      if (fb.parentNode !== parent) return;
       if (fb.nextElementSibling !== fbi && document.contains(fb)){
         try { parent.insertBefore(fbi, fb.nextElementSibling); } catch(e){}
       }
