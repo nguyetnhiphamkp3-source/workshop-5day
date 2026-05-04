@@ -3026,6 +3026,139 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 </script>
 
 <!-- ============================================================
+     "Cách Kiếm Tiền Online Đã Thay Đổi Hoàn Toàn" Section.
+     Sits right after Image Feedback (#fbi-section). Same 740px width.
+     ============================================================ -->
+<style data-cko>
+.cko{
+  background:#000;
+  padding:64px 24px 64px;
+  font-family:"Inter Display","Inter Display Placeholder","Inter","Inter Placeholder",sans-serif;
+}
+.cko__container{
+  max-width:740px;
+  margin:0 auto;
+}
+.cko__title{
+  font-family:"Inter Display","Inter Display Placeholder","Inter",sans-serif;
+  font-weight:600;
+  font-size:36px;
+  line-height:1.25;
+  letter-spacing:0;
+  color:#fafafa;
+  text-align:center;
+  margin:0 0 32px;
+}
+.cko__intro,
+.cko__close{
+  font-family:"Inter","Inter Placeholder","Manrope",sans-serif;
+  font-size:18px;
+  line-height:1.7;
+  color:#ffffff;
+  text-align:center;
+  margin:0 0 18px;
+}
+.cko__list{
+  list-style:none;
+  padding:0;
+  margin:0 auto 26px;
+  max-width:560px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.cko__list li{
+  font-family:"Inter","Inter Placeholder","Manrope",sans-serif;
+  font-size:18px;
+  line-height:1.55;
+  color:#ffffff;
+  padding-left:24px;
+  position:relative;
+  text-align:left;
+}
+.cko__list li::before{
+  content:"";
+  position:absolute;
+  left:4px;
+  top:11px;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#a78bfa;
+}
+.cko__close{ margin-bottom:14px; }
+.cko__close:last-child{ margin-bottom:0; }
+@media (max-width:639px){
+  .cko{ padding:48px 16px; }
+  .cko__title{ font-size:28px; margin-bottom:24px; }
+  .cko__intro,
+  .cko__close,
+  .cko__list li{ font-size:16px; }
+  .cko__list li{ padding-left:20px; }
+  .cko__list li::before{ width:7px; height:7px; top:10px; left:4px; }
+}
+</style>
+<section class="cko" id="cko-section" aria-labelledby="cko-title">
+  <div class="cko__container">
+    <h2 class="cko__title" id="cko-title">Cách Kiếm Tiền Online Đã Thay Đổi Hoàn Toàn</h2>
+    <p class="cko__intro">Ngay lúc này, hàng triệu người đang cần giải pháp cho những vấn đề cụ thể:</p>
+    <ul class="cko__list">
+      <li>Làm sao chạy quảng cáo hiệu quả hơn</li>
+      <li>Làm sao viết content thu hút khách hàng</li>
+      <li>Làm sao quản lý tài chính cá nhân tốt hơn</li>
+      <li>Làm sao học kỹ năng mới nhanh hơn</li>
+      <li>Làm sao tự động hoá công việc nhàm chán</li>
+    </ul>
+    <p class="cko__close">Và họ sẵn sàng trả tiền cho người giúp họ giải quyết.</p>
+    <p class="cko__close">Thông tin để giải quyết những vấn đề này đều có trên internet — miễn phí. Nhưng nó nằm rải rác khắp nơi, lộn xộn và khó dùng.</p>
+  </div>
+</section>
+<script data-cko>
+(function(){
+  function move(){
+    var cko = document.getElementById('cko-section');
+    var fbi = document.getElementById('fbi-section');
+    var hero = document.querySelector('.framer-3zt6nn');
+    if (!cko || !fbi || !hero || !hero.parentNode) return false;
+    if (fbi.parentNode !== hero.parentNode) return false; // wait for fbi to settle
+    if (fbi.nextElementSibling !== cko){
+      fbi.parentNode.insertBefore(cko, fbi.nextElementSibling);
+    }
+    return true;
+  }
+  function watch(){
+    var hero = document.querySelector('.framer-3zt6nn');
+    var fbi = document.getElementById('fbi-section');
+    var cko = document.getElementById('cko-section');
+    if (!hero || !hero.parentNode || !fbi || !cko || !('MutationObserver' in window)) return;
+    var parent = hero.parentNode;
+    var obs = new MutationObserver(function(){
+      if (fbi.parentNode !== parent) return;
+      if (fbi.nextElementSibling !== cko && document.contains(fbi)){
+        try { parent.insertBefore(cko, fbi.nextElementSibling); } catch(e){}
+      }
+    });
+    obs.observe(parent, {childList:true});
+  }
+  function start(){
+    var tries = 0;
+    var t = setInterval(function(){
+      tries++;
+      if (move() || tries > 80){
+        clearInterval(t);
+        watch();
+      }
+    }, 150);
+  }
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+})();
+</script>
+
+<!-- ============================================================
      FAQ Section — outside Framer hydration so it persists.
      Tone: black bg + warm orange/gold accents to match site.
      ============================================================ -->
