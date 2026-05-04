@@ -3862,6 +3862,25 @@ html, body{
   overflow-x:hidden !important;
 }
 </style>
+<style data-faq-no-divider>
+/* Hide any Framer decorative line/divider above FAQ (both desktop + mobile). */
+.framer-71ANT [data-framer-name="seperation line"],
+.framer-71ANT .framer-1kvpksr,
+.framer-71ANT [data-framer-name="Light Line"],
+.framer-71ANT [data-framer-name="Bottom Lines"]{
+  display:none !important;
+}
+.wq-faq,
+.wq-faq::before,
+.wq-faq::after{
+  border-top:0 !important;
+}
+.wq-faq::before,
+.wq-faq::after{
+  content:none !important;
+  display:none !important;
+}
+</style>
 <style data-mobile-sync>
 /* Mobile sync (≤639px) — user-requested unified spacing & typography:
    • 50px top/bottom on each section → ~100px gap between sections
@@ -3889,14 +3908,16 @@ html, body{
 
   .wn__title,
   .fb__title,
-  .fbi__title,
   .cko__title,
   .disc__title,
-  .why__title{
+  .why__title,
+  .wq-faq__title{
     font-size:30px !important;
     line-height:1.2 !important;
     text-wrap:balance;
   }
+  /* fbi__title is a sub-line / description, not a section title — keep small. */
+  .fbi__title{ font-size:20px !important; line-height:1.45 !important; }
   /* Drop hard <br> in fb title on mobile so wrap is natural+balanced. */
   .fb__title br{ display:none !important; }
 
