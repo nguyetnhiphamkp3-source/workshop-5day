@@ -3856,8 +3856,9 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 </script>
 
 <style data-section-dividers>
-/* Thin horizontal divider line between sections from section 1 (wn) onward.
-   Applied as border-top so it sits at the boundary between sections. */
+/* Section dividers — clone of Framer's .framer-1kvpksr "seperation line"
+   style: 4px-tall violet radial gradient that fades to black on the sides,
+   creating a soft glow line. Applied via ::before on each section. */
 .framer-71ANT [data-framer-name^="LP - "],
 .framer-71ANT [data-framer-name^="Section:"],
 .wn,
@@ -3867,11 +3868,34 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 .cko,
 .disc,
 .why{
-  border-top:1px solid rgba(255,255,255,0.10) !important;
-}
-/* Don't show divider above hidden sections (already display:none, but be safe). */
-.framer-71ANT [data-framer-name="LP - Event Dates"]{
+  position:relative;
   border-top:0 !important;
+}
+.framer-71ANT [data-framer-name^="LP - "]::before,
+.framer-71ANT [data-framer-name^="Section:"]::before,
+.wn::before,
+.lt::before,
+.fb::before,
+.fbi::before,
+.cko::before,
+.disc::before,
+.why::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:1280px;
+  max-width:100vw;
+  height:4px;
+  background:radial-gradient(63.6719% 63.6719%, #a78bfa 0%, #000 100%);
+  opacity:0.5;
+  pointer-events:none;
+  z-index:2;
+}
+/* Hidden Event Dates section: no divider needed. */
+.framer-71ANT [data-framer-name="LP - Event Dates"]::before{
+  display:none !important;
 }
 </style>
 <style data-hide-event-dates>
