@@ -2515,9 +2515,9 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
 .fb__videocard{
   width:100%;
   max-width:840px;
-  /* 2px gradient border, transparent inner so page bg shows through */
+  /* 2px gradient border with caption strip inside card */
   border:2px solid transparent;
-  border-radius:18px;
+  border-radius:20px;
   background:
     linear-gradient(#000, #000) padding-box,
     linear-gradient(135deg,
@@ -2528,7 +2528,8 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
       #b9a4ff 66.6%,
       #f3f4f6 83.3%,
       #a78bfa 100%) border-box;
-  padding:14px;
+  padding:0;
+  overflow:hidden;
 }
 .fb__yt{
   position:relative;
@@ -2536,7 +2537,7 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   width:100%;
   aspect-ratio:16 / 9;
   border:0;
-  border-radius:12px;
+  border-radius:0;
   overflow:hidden;
   cursor:pointer;
   background:#0a0814;
@@ -2590,27 +2591,33 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   width:100%; height:100%;
   border:0;
 }
+.fb__captionbox{
+  background:linear-gradient(180deg, rgba(20,16,40,0.65) 0%, rgba(12,10,26,0.85) 100%);
+  border-top:1px solid rgba(190,180,255,0.18);
+  padding:18px 22px;
+}
 .fb__caption{
-  margin:14px 4px 0;
+  margin:0;
   font-family:"Inter","Inter Placeholder","Manrope",sans-serif;
   font-size:16px;
   line-height:1.55;
   color:#ffffff;
-  text-align:left;
+  text-align:center;
 }
 .fb__capname{
   font-weight:700;
-  color:#ffffff;
+  color:#c4b5fd;
 }
 @media (max-width:639px){
   .fb{ padding:56px 16px; }
   .fb__title{ font-size:28px; }
   .fb__subtitle{ font-size:16px; margin-bottom:32px; }
   .fb__videos{ gap:24px; }
-  .fb__videocard{ padding:10px; border-radius:14px; }
+  .fb__videocard{ border-radius:16px; }
   .fb__ytplay{ width:60px; height:60px; }
   .fb__ytplay::before{ border-width:11px 0 11px 17px; }
-  .fb__caption{ font-size:15px; margin-top:12px; }
+  .fb__captionbox{ padding:14px 16px; }
+  .fb__caption{ font-size:15px; }
 }
 </style>
 <section class="fb" id="fb-section" aria-labelledby="fb-title">
@@ -2625,7 +2632,7 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
           <img class="fb__ytthumb" src="https://i.ytimg.com/vi/n4O3-0zQeUo/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/n4O3-0zQeUo/hqdefault.jpg';">
           <span class="fb__ytplay" aria-hidden="true"></span>
         </button>
-        <p class="fb__caption"><span class="fb__capname">Nguyễn Hữu Thông</span>: Giám Đốc Trung Tâm Chuyển Đổi Số Và AI Của Viện Phát Triển Chuyển Đổi Số Việt Nam</p>
+        <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Nguyễn Hữu Thông</span>: Giám Đốc Trung Tâm Chuyển Đổi Số Và AI Của Viện Phát Triển Chuyển Đổi Số Việt Nam</p></div>
       </div>
 
       <div class="fb__videocard">
@@ -2633,7 +2640,7 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
           <img class="fb__ytthumb" src="https://i.ytimg.com/vi/uuVTQaqhL2g/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/uuVTQaqhL2g/hqdefault.jpg';">
           <span class="fb__ytplay" aria-hidden="true"></span>
         </button>
-        <p class="fb__caption"><span class="fb__capname">Bá Khương Trịnh</span>: Kinh doanh Bất động sản</p>
+        <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Bá Khương Trịnh</span>: Kinh doanh Bất động sản</p></div>
       </div>
 
       <div class="fb__videocard">
@@ -2641,7 +2648,7 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
           <img class="fb__ytthumb" src="https://i.ytimg.com/vi/7WvKgSXHs18/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/7WvKgSXHs18/hqdefault.jpg';">
           <span class="fb__ytplay" aria-hidden="true"></span>
         </button>
-        <p class="fb__caption"><span class="fb__capname">Cảnh Toàn</span>: Kinh doanh Online sản phẩm số AI</p>
+        <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Cảnh Toàn</span>: Kinh doanh Online sản phẩm số AI</p></div>
       </div>
 
       <div class="fb__videocard">
@@ -2649,7 +2656,7 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
           <img class="fb__ytthumb" src="https://i.ytimg.com/vi/L4tey9LuRhk/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/L4tey9LuRhk/hqdefault.jpg';">
           <span class="fb__ytplay" aria-hidden="true"></span>
         </button>
-        <p class="fb__caption"><span class="fb__capname">Phan Tuan Nguyen</span>: Thành viên AI Agent Challenge 21 Days</p>
+        <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Phan Tuan Nguyen</span>: Thành viên AI Agent Challenge 21 Days</p></div>
       </div>
 
       <div class="fb__videocard">
@@ -2657,7 +2664,7 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
           <img class="fb__ytthumb" src="https://i.ytimg.com/vi/JK41K5CII9s/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/JK41K5CII9s/hqdefault.jpg';">
           <span class="fb__ytplay" aria-hidden="true"></span>
         </button>
-        <p class="fb__caption"><span class="fb__capname">Quảng Đào Xuân</span>: Thành viên AI Agent Challenge 21 Days</p>
+        <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Quảng Đào Xuân</span>: Thành viên AI Agent Challenge 21 Days</p></div>
       </div>
 
       <div class="fb__videocard">
@@ -2665,7 +2672,7 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
           <img class="fb__ytthumb" src="https://i.ytimg.com/vi/j3ESa6e84AA/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/j3ESa6e84AA/hqdefault.jpg';">
           <span class="fb__ytplay" aria-hidden="true"></span>
         </button>
-        <p class="fb__caption"><span class="fb__capname">Quyền Linh Đinh</span>: Thành viên AI Agent Challenge 21 Days</p>
+        <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Quyền Linh Đinh</span>: Thành viên AI Agent Challenge 21 Days</p></div>
       </div>
 
       <div class="fb__videocard">
@@ -2673,7 +2680,7 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
           <img class="fb__ytthumb" src="https://i.ytimg.com/vi/-p40I0f28kA/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/-p40I0f28kA/hqdefault.jpg';">
           <span class="fb__ytplay" aria-hidden="true"></span>
         </button>
-        <p class="fb__caption"><span class="fb__capname">Thach Pham</span>: Thành viên AI Agent Challenge 21 Days</p>
+        <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Thach Pham</span>: Thành viên AI Agent Challenge 21 Days</p></div>
       </div>
 
       <div class="fb__videocard">
@@ -2681,7 +2688,7 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
           <img class="fb__ytthumb" src="https://i.ytimg.com/vi/6C9SJdrhYUo/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/6C9SJdrhYUo/hqdefault.jpg';">
           <span class="fb__ytplay" aria-hidden="true"></span>
         </button>
-        <p class="fb__caption"><span class="fb__capname">Thong Nguyen</span>: Thành viên AI Agent Challenge 21 Days</p>
+        <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Thong Nguyen</span>: Thành viên AI Agent Challenge 21 Days</p></div>
       </div>
 
       <div class="fb__videocard">
@@ -2689,7 +2696,7 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
           <img class="fb__ytthumb" src="https://i.ytimg.com/vi/zp0xkeeg7nY/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/zp0xkeeg7nY/hqdefault.jpg';">
           <span class="fb__ytplay" aria-hidden="true"></span>
         </button>
-        <p class="fb__caption"><span class="fb__capname">Trần Thuận Hoá</span>: Thành viên AI Agent Challenge 21 Days</p>
+        <div class="fb__captionbox"><p class="fb__caption"><span class="fb__capname">Trần Thuận Hoá</span>: Thành viên AI Agent Challenge 21 Days</p></div>
       </div>
 
     </div>
