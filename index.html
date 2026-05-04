@@ -2560,7 +2560,7 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   display:grid;
   place-items:center;
   pointer-events:none;
-  z-index:2;
+  z-index:3;
   transition:background 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
 }
 .fb__yt:hover .fb__ytplay{
@@ -2584,8 +2584,33 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   pointer-events:none; /* block YouTube hover overlays during preview */
   z-index:1;
 }
+/* Top + bottom gradient masks to hide YouTube branding (title bar, channel info,
+   YT logo, share button) during muted preview. Faded out when user activates. */
+.fb__yt::before,
+.fb__yt::after{
+  content:'';
+  position:absolute;
+  left:0; right:0;
+  z-index:2;
+  pointer-events:none;
+  transition:opacity 0.25s ease;
+}
+.fb__yt::before{
+  top:0;
+  height:34%;
+  background:linear-gradient(180deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 50%, transparent 100%);
+}
+.fb__yt::after{
+  bottom:0;
+  height:22%;
+  background:linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.35) 60%, transparent 100%);
+}
 .fb__yt.is-active iframe{
   pointer-events:auto; /* enable normal YT controls after click-to-unmute */
+}
+.fb__yt.is-active::before,
+.fb__yt.is-active::after{
+  opacity:0;
 }
 .fb__yt.is-active .fb__ytplay,
 .fb__yt.is-active .fb__muteicon{
@@ -2603,7 +2628,7 @@ h4 [data-text-fill="true"],h5 [data-text-fill="true"],h6 [data-text-fill="true"]
   display:grid;
   place-items:center;
   color:#fff;
-  z-index:2;
+  z-index:3;
   pointer-events:none;
   transition:background 0.25s ease;
 }
