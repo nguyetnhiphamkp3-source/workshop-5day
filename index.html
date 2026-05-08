@@ -769,6 +769,20 @@ head.appendChild(script);
   opacity:1;animation:ptb-shimmer var(--ptb-shimmer-duration) ease-in-out;
 }
 
+/* Chi Tiết Chương Trình card titles (CÁI GÌ / KHI NÀO / ĐỐI TƯỢNG / TẠI SAO):
+   loosen line-height + allow overflow so Vietnamese diacritics like Ố / Ư / Ợ
+   in "ĐỐI TƯỢNG" don't get clipped by the 1.2em Framer default.
+   Applies to all breakpoints (mobile rule overrides for 26px size). */
+.framer-71ANT [data-framer-name="Sub Container"] h2,
+.framer-71ANT [data-framer-name="Sub Container"] h2 *,
+.framer-71ANT [data-framer-name="Sub Container"] [data-framer-name="Number"],
+.framer-71ANT [data-framer-name="Sub Container"] [data-framer-name="Number"] *{
+  line-height:1.4em!important;
+  --framer-line-height:1.4em!important;
+  overflow:visible!important;
+  padding-top:2px!important;
+}
+
 /* === Mobile responsive — keep the silver pill but fit it inside the
    viewport. Same selectors as the desktop adapter rules above so we beat
    them on cascade order without specificity wars. === */
@@ -4648,10 +4662,14 @@ html, body{
   .framer-71ANT [data-framer-name="Sub Container"] [data-framer-name="Text"]{
     grid-area:body;
   }
-  .framer-71ANT [data-framer-name="Sub Container"] h2{
+  .framer-71ANT [data-framer-name="Sub Container"] h2,
+  .framer-71ANT [data-framer-name="Sub Container"] h2 *{
     font-size:26px !important;
-    line-height:1.2 !important;
+    line-height:1.4em !important;
+    --framer-line-height:1.4em !important;
     margin:0 !important;
+    overflow:visible !important;
+    padding-top:2px !important;
   }
   .framer-71ANT [data-framer-name="Sub Container"] p{
     font-size:15px !important;
