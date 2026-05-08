@@ -1986,8 +1986,26 @@ body{ padding-top:44px !important; }
      bleeds below the hero box on phones, overlapping the wn title. Push the
      wn section away from the hero with a hard top buffer. */
   #wn-section{
-    margin-top:40px !important;
-    padding-top:20px !important;
+    margin-top:-110px !important;
+    padding-top:14px !important;
+  }
+  /* disc-section: 20px gutter on phones. Apply on the inner container (not
+     the outer section) since the section's existing padding rules from a
+     later @media block keep being overridden by Framer's cascade. The
+     container is more directly responsible for child positioning. */
+  body #disc-section{
+    padding-left:0 !important;
+    padding-right:0 !important;
+  }
+  body #disc-section .disc__container{
+    padding-left:20px !important;
+    padding-right:20px !important;
+    box-sizing:border-box !important;
+  }
+  body #disc-section .disc__head,
+  body #disc-section .disc__body{
+    width:auto !important;
+    max-width:100% !important;
   }
   /* fb-section: force the hero video edge-to-edge on phones — no rounded
      corners, no horizontal gap. */
