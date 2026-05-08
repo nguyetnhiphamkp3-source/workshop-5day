@@ -768,6 +768,41 @@ head.appendChild(script);
 [data-framer-name="Primary Button"] > a[data-framer-name="Yellow"]:hover::before{
   opacity:1;animation:ptb-shimmer var(--ptb-shimmer-duration) ease-in-out;
 }
+
+/* === Mobile responsive — keep the silver pill but fit it inside the
+   viewport. Same selectors as the desktop adapter rules above so we beat
+   them on cascade order without specificity wars. === */
+@media (max-width:809.98px){
+  [data-framer-name="Primary Button"]{
+    max-width:calc(100vw - 32px)!important;
+  }
+  /* Vietnamese diacritics (Ậ, Ễ, Ầ, Ổ) sit higher than Latin caps. The
+     desktop rule's overflow:hidden + tight padding clips their tops on the
+     smaller mobile font, so allow the pill to render outside the box and
+     loosen vertical padding + line-height. */
+  [data-framer-name="Primary Button"] > a[data-framer-name="Yellow"]{
+    padding:14px 22px!important;
+    overflow:visible!important;
+    line-height:1.45em!important;
+  }
+  [data-framer-name="Primary Button"] a[data-framer-name="Yellow"] h4,
+  [data-framer-name="Primary Button"] a[data-framer-name="Yellow"] h4 *{
+    font-size:13px!important;
+    --framer-font-size:13px!important;
+    line-height:1.45em!important;
+    letter-spacing:0!important;
+  }
+}
+@media (max-width:380px){
+  [data-framer-name="Primary Button"] a[data-framer-name="Yellow"] h4,
+  [data-framer-name="Primary Button"] a[data-framer-name="Yellow"] h4 *{
+    font-size:12px!important;
+    --framer-font-size:12px!important;
+  }
+  [data-framer-name="Primary Button"] > a[data-framer-name="Yellow"]{
+    padding:13px 18px!important;
+  }
+}
 </style><style data-title-metal>
 /* Landio metallic silver gradient for all headings */
 h1,h2,h3,h4,h5,h6{
@@ -1989,23 +2024,54 @@ body{ padding-top:44px !important; }
     margin-top:-110px !important;
     padding-top:14px !important;
   }
-  /* disc-section: 20px gutter on phones. Apply on the inner container (not
-     the outer section) since the section's existing padding rules from a
-     later @media block keep being overridden by Framer's cascade. The
-     container is more directly responsible for child positioning. */
-  body #disc-section{
-    padding-left:0 !important;
-    padding-right:0 !important;
-  }
-  body #disc-section .disc__container{
+  /* cko-section: hard-anchor against viewport width so nothing inside can
+     bleed past the screen edges. overflow-x:hidden as a final clip. */
+  body #cko-section{
+    width:100% !important;
+    max-width:100vw !important;
+    box-sizing:border-box !important;
     padding-left:20px !important;
     padding-right:20px !important;
+    overflow-x:hidden !important;
+  }
+  body #cko-section .cko__container{
+    width:100% !important;
+    max-width:100% !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+    padding-left:0 !important;
+    padding-right:0 !important;
     box-sizing:border-box !important;
   }
+  body #cko-section .cko__intro,
+  body #cko-section .cko__close,
+  body #cko-section .cko__list,
+  body #cko-section .cko__list li,
+  body #cko-section .cko__compare{
+    width:100% !important;
+    max-width:100% !important;
+    box-sizing:border-box !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+  }
+
+  /* disc-section: 20px gutter on phones. Pin head + body width to
+     calc(100vw - 40px) and center with auto margins so the 20px is
+     measured against the viewport itself (bypasses any ancestor that
+     might be wider than expected). */
   body #disc-section .disc__head,
   body #disc-section .disc__body{
-    width:auto !important;
-    max-width:100% !important;
+    width:calc(100vw - 40px) !important;
+    max-width:calc(100vw - 40px) !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    box-sizing:border-box !important;
+  }
+  body #disc-section,
+  body #disc-section .disc__container{
+    padding-left:0 !important;
+    padding-right:0 !important;
+    overflow-x:visible !important;
   }
   /* fb-section: force the hero video edge-to-edge on phones — no rounded
      corners, no horizontal gap. */
@@ -2024,35 +2090,7 @@ body{ padding-top:44px !important; }
   #fb-section .fb__heroframe{
     box-shadow:none !important;
   }
-}
-@media (max-width:809.98px){
-  /* CTA "NHẬN VÉ THAM GIA MIỄN PHÍ TẠI ĐÂY!" button on mobile — keep Framer's
-     default pill corners, just shrink the label to 16px and cap the button
-     width to viewport so it doesn't bleed past the screen. */
-  /* Force font-size at every level: the wrapper sets the Framer variable
-     reference, the text element + every descendant span gets explicit 14px
-     so the inner text node ends up at 14px regardless of which selector
-     Framer uses to compute it. */
-  [data-framer-name="Primary Button"]{
-    --variable-reference-zviTCiEF0-YtacprWYl:14 !important;
-    width:auto !important;
-    max-width:calc(100vw - 32px) !important;
-  }
-  [data-framer-name="Primary Button"] h4,
-  [data-framer-name="Primary Button"] h4 *,
-  [data-framer-name="Primary Button"] .framer-text,
-  [data-framer-name="Primary Button"] .framer-text *,
-  /* Direct hit on the actual class wrapping the label — bypasses any
-     specificity battle with Framer's default h4 rules. */
-  .framer-1bl573g,
-  .framer-1bl573g h4{
-    --framer-font-size:12px !important;
-    --font-size:12px !important;
-    font-size:12px !important;
-    line-height:1.2em !important;
-    letter-spacing:0 !important;
-    text-align:center !important;
-  }
+
 }
 </style>
 
