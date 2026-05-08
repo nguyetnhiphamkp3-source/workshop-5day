@@ -49,6 +49,23 @@ def newest_mtime():
     return latest
 
 class Handler(http.server.SimpleHTTPRequestHandler):
+    def translate_path(self, path):
+        # Framer hydration .mjs references images at paths whose on-disk file
+        # carries a .webp extension we have to add — either appended (for the
+        # ".png_Q_..._E_1204" Framer scaler URLs) or substituted (for plain
+        # ".png"/".jpg" assets that were re-encoded to webp).
+        fs = super().translate_path(path)
+        if os.path.isfile(fs):
+            return fs
+        if os.path.isfile(fs + '.webp'):
+            return fs + '.webp'
+        for ext in ('.png', '.jpg', '.jpeg'):
+            if fs.lower().endswith(ext):
+                alt = fs[: -len(ext)] + '.webp'
+                if os.path.isfile(alt):
+                    return alt
+        return fs
+
     def guess_type(self, path):
         base = os.path.basename(path)
         m = re.search(r'\.([A-Za-z0-9]+)(?:_Q_|$)', base)
